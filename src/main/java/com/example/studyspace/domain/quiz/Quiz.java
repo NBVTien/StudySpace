@@ -1,7 +1,7 @@
 package com.example.studyspace.domain.quiz;
 
-import com.example.studyspace.domain.common.models.Aggregate;
-import com.example.studyspace.domain.common.models.AggregateId;
+import com.example.studyspace.domain.common.models.Entity;
+import com.example.studyspace.domain.common.models.EntityId;
 import com.example.studyspace.domain.quiz.entities.Question;
 import lombok.Getter;
 
@@ -9,12 +9,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
-public class Quiz extends Aggregate {
+public class Quiz extends Entity {
     private List<Question> questions;
     private String title;
     private String description;
 
-    protected Quiz(AggregateId id,
+    protected Quiz(EntityId id,
                    List<Question> questions,
                    String title,
                    String description,
@@ -29,7 +29,7 @@ public class Quiz extends Aggregate {
     public static Quiz create(List<Question> questions,
                               String title,
                               String description) {
-        return new Quiz(AggregateId.generate(),
+        return new Quiz(EntityId.generate(),
                 questions,
                 title,
                 description,

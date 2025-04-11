@@ -1,19 +1,20 @@
 package com.example.studyspace.domain.quiz.entities;
 
-import com.example.studyspace.domain.common.models.Aggregate;
-import com.example.studyspace.domain.common.models.AggregateId;
+import com.example.studyspace.domain.common.models.Entity;
+import com.example.studyspace.domain.common.models.EntityId;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
-public class Question extends Aggregate {
+public class Question extends Entity {
     private String question;
     private List<String> options;
     private String correctAnswer;
 
-    protected Question(AggregateId id,
+    protected Question(EntityId id,
                        String question,
                        List<String> options,
                        String correctAnswer,
@@ -36,7 +37,7 @@ public class Question extends Aggregate {
             throw new IllegalArgumentException("Correct answer must be one of the options");
         }
 
-        return new Question(AggregateId.generate(),
+        return new Question(EntityId.generate(),
                 question,
                 options,
                 correctAnswer,
