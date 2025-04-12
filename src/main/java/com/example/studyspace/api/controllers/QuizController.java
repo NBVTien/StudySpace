@@ -1,14 +1,11 @@
 package com.example.studyspace.api.controllers;
 
 import com.example.studyspace.application.services.QuizService;
-import com.example.studyspace.domain.common.models.EntityId;
 import com.example.studyspace.domain.quiz.Quiz;
 import com.example.studyspace.api.contracts.quizzes.QuizResponse;
 import com.example.studyspace.api.mapper.QuizMapper;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -27,8 +24,9 @@ public class QuizController {
     }
 
     @GetMapping("/quizzes/{id}")
-    public Quiz getQuizById(@PathVariable UUID id) {
-        return quizService.getById(id);
+    public ResponseEntity<Quiz> getQuizById(@PathVariable String id) {
+        var quiz = quizService.getById(id);
+        return ResponseEntity.ok(quiz);
     }
 
     @PostMapping("/quizzes")
@@ -36,13 +34,12 @@ public class QuizController {
         quizService.save(quiz);
     }
 
-    @PostMapping("/quizzes/{id}")
-    public void updateQuiz(@PathVariable UUID id, Quiz quiz) {
-        quiz.setId(EntityId.create(id));
-        quizService.update(quiz);
+    @PutMapping("/quizzes/{id}")
+    public void updateQuiz(@PathVariable String id, Quiz quiz) {
+        quizService.update(id, quiz);
     }
 
-    @PostMapping("/quizzes/{id}/delete")
+    @DeleteMapping("/quizzes/{id}")
     public void deleteQuiz(@PathVariable String id) {
         quizService.delete(id);
     }

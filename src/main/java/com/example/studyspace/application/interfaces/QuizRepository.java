@@ -9,6 +9,6 @@ public interface QuizRepository {
     List<Quiz> getAll();
     Quiz getById(UUID id);
     void save(Quiz quiz);
-    void update(Quiz quiz);
-    void delete(String id);
+    void update(UUID id, Quiz quiz);
+    void delete(UUID id);
 }

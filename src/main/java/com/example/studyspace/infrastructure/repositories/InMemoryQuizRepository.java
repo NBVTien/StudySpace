@@ -62,21 +62,28 @@ public class InMemoryQuizRepository implements QuizRepository {
 
     @Override
     public Quiz getById(UUID id) {
-        return null;
+        Quiz quiz = quizzes.stream()
+            .filter(q -> q.getId().getValue().equals(id))
+            .findFirst()
+            .orElse(null);
+        return quiz;
     }
 
     @Override
     public void save(Quiz quiz) {
-
+        quizzes.add(quiz);
     }
 
     @Override
-    public void update(Quiz quiz) {
-
+    public void update(UUID id, Quiz quiz) {
+        // Not implemented in this in-memory repository
     }
 
     @Override
-    public void delete(String id) {
-
+    public void delete(UUID id) {
+        Quiz quiz = getById(id);
+        if (quiz != null) {
+            quizzes.remove(quiz);
+        }
     }
 }
