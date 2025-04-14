@@ -7,8 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 public abstract class Entity {
-    @Setter
-    private EntityId id;
+    private final EntityId id;
     private final LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

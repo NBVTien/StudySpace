@@ -1,5 +1,6 @@
 package com.example.studyspace.api.mapper;
 
+import com.example.studyspace.application.quiz.dtos.QuestionDto;
 import com.example.studyspace.domain.quiz.entities.Question;
 import com.example.studyspace.api.contracts.quizzes.QuestionRequest;
 import com.example.studyspace.api.contracts.quizzes.QuestionResponse;
@@ -33,6 +34,20 @@ interface QuestionMapper {
     static List<QuestionResponse> questionResponses(List<Question> questions) {
         return questions.stream()
             .map(QuestionMapper::questionResponse)
+            .toList();
+    }
+
+    static QuestionDto questionDto(QuestionRequest questionRequest) {
+        return new QuestionDto(
+            questionRequest.question(),
+            questionRequest.options(),
+            questionRequest.correctAnswer()
+        );
+    }
+
+    static List<QuestionDto> questionDtos(List<QuestionRequest> questionRequests) {
+        return questionRequests.stream()
+            .map(QuestionMapper::questionDto)
             .toList();
     }
 }

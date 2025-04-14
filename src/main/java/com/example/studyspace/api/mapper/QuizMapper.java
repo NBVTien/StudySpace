@@ -1,5 +1,6 @@
 package com.example.studyspace.api.mapper;
 
+import com.example.studyspace.application.quiz.dtos.QuizDto;
 import com.example.studyspace.domain.quiz.Quiz;
 import com.example.studyspace.api.contracts.quizzes.QuizRequest;
 import com.example.studyspace.api.contracts.quizzes.QuizResponse;
@@ -28,5 +29,13 @@ public interface QuizMapper {
         return quizzes.stream()
             .map(QuizMapper::quizResponse)
             .toList();
+    }
+
+    static QuizDto quizDto(QuizRequest quizRequest) {
+        return new QuizDto(
+            QuestionMapper.questionDtos(quizRequest.questions()),
+            quizRequest.title(),
+            quizRequest.description()
+        );
     }
 }

@@ -1,4 +1,4 @@
-package com.example.studyspace.application.interfaces;
+package com.example.studyspace.application.common.interfaces;
 
 import com.example.studyspace.domain.quiz.Quiz;
 

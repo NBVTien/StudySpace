@@ -1,16 +1,17 @@
 package com.example.studyspace.infrastructure.repositories;
 
-import com.example.studyspace.application.interfaces.QuizRepository;
+import com.example.studyspace.application.common.interfaces.QuizRepository;
 import com.example.studyspace.domain.quiz.Quiz;
 import com.example.studyspace.domain.quiz.entities.Question;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Repository
 public class InMemoryQuizRepository implements QuizRepository {
-    private final List<Quiz> quizzes = List.of(
+    private List<Quiz> quizzes = new ArrayList<>(List.of(
         Quiz.create(
             List.of(
                 Question.create(
@@ -53,7 +54,7 @@ public class InMemoryQuizRepository implements QuizRepository {
             "Science Quiz",
             "A quiz about basic science"
         )
-    );
+    ));
 
     @Override
     public List<Quiz> getAll() {
@@ -76,7 +77,9 @@ public class InMemoryQuizRepository implements QuizRepository {
 
     @Override
     public void update(UUID id, Quiz quiz) {
-        // Not implemented in this in-memory repository
+        Quiz existingQuiz = getById(id);
+        quizzes.remove(existingQuiz);
+        quizzes.add(quiz);
     }
 
     @Override
