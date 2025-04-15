@@ -1,4 +1,4 @@
-package com.example.studyspace.api.mapper;
+package com.example.studyspace.api.mappers;
 
 import com.example.studyspace.application.quiz.dtos.QuestionDto;
 import com.example.studyspace.domain.quiz.entities.Question;
@@ -43,11 +43,5 @@ interface QuestionMapper {
             questionRequest.options(),
             questionRequest.correctAnswer()
         );
-    }
-
-    static List<QuestionDto> questionDtos(List<QuestionRequest> questionRequests) {
-        return questionRequests.stream()
-            .map(QuestionMapper::questionDto)
-            .toList();
     }
 }

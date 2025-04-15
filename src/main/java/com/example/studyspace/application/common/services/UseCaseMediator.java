@@ -30,9 +30,7 @@ public class UseCaseMediator {
     @SuppressWarnings("unchecked")
     public <TRequest extends UseCaseInput<TResponse>, TResponse> TResponse execute(TRequest request) {
         UseCaseValidator<TRequest> validator = (UseCaseValidator<TRequest>) validators.get(request.getClass());
-        if (validator != null) {
-            validator.validate(request);
-        }
+        if (validator != null) { validator.validate(request); }
 
         UseCase<TRequest, TResponse> useCase = (UseCase<TRequest, TResponse>) useCases.get(request.getClass());
         if (useCase == null) {

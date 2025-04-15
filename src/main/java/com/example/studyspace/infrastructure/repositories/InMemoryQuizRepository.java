@@ -13,44 +13,10 @@ import java.util.UUID;
 public class InMemoryQuizRepository implements QuizRepository {
     private List<Quiz> quizzes = new ArrayList<>(List.of(
         Quiz.create(
-            List.of(
-                Question.create(
-                    "What is the capital of France?",
-                    List.of("Berlin", "Madrid", "Paris", "Rome"),
-                    "Paris"
-                ),
-                Question.create(
-                    "What is the largest planet in our solar system?",
-                    List.of("Earth", "Jupiter", "Mars", "Saturn"),
-                    "Jupiter"
-                ),
-                Question.create(
-                    "What is the smallest country in the world?",
-                    List.of("Vatican City", "Monaco", "Nauru", "Malta"),
-                    "Vatican City"
-                )
-            ),
             "Geography Quiz",
             "A quiz about world geography"
         ),
         Quiz.create(
-            List.of(
-                Question.create(
-                    "What is the chemical symbol for gold?",
-                    List.of("Au", "Ag", "Pb", "Fe"),
-                    "Au"
-                ),
-                Question.create(
-                    "What is the speed of light?",
-                    List.of("300,000 km/s", "150,000 km/s", "1,000,000 km/s", "3,000 km/s"),
-                    "300,000 km/s"
-                ),
-                Question.create(
-                    "What is the most abundant gas in the Earth's atmosphere?",
-                    List.of("Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"),
-                    "Nitrogen"
-                )
-            ),
             "Science Quiz",
             "A quiz about basic science"
         )

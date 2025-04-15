@@ -9,7 +9,7 @@ import com.example.studyspace.application.quiz.queries.readbyid.ReadQuizQuery;
 import com.example.studyspace.application.quiz.queries.readall.ReadQuizzesQuery;
 import com.example.studyspace.domain.quiz.Quiz;
 import com.example.studyspace.api.contracts.quizzes.QuizResponse;
-import com.example.studyspace.api.mapper.QuizMapper;
+import com.example.studyspace.api.mappers.QuizMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

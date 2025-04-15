@@ -9,17 +9,5 @@ import org.springframework.stereotype.Component;
 @Component
 public class CreateQuizCommandValidator implements UseCaseValidator<CreateQuizCommand> {
     @Override
-    public void validate(CreateQuizCommand command) {
-        QuizDto quizDto = command.getQuizDto();
-        quizDto.questions().forEach(this::validateQuestion);
-    }
-
-    private void validateQuestion(QuestionDto questionDto) {
-        if (questionDto.options().size() < 2) {
-            throw new IllegalArgumentException(ErrorMessages.QUESTION_MINIMUM_OPTIONS.getMessage());
-        }
-        if (!questionDto.options().contains(questionDto.correctAnswer())) {
-            throw new IllegalArgumentException(ErrorMessages.QUESTION_NOT_CONTAINING_CORRECT_ANSWER.getMessage());
-        }
-    }
+    public void validate(CreateQuizCommand command) {}
 }

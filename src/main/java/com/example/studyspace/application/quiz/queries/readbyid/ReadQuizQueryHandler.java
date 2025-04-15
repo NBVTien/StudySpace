@@ -18,14 +18,9 @@ public class ReadQuizQueryHandler implements UseCase<ReadQuizQuery, Quiz> {
 
     @Override
     public Quiz execute(ReadQuizQuery readQuizQuery) {
-        var id = readQuizQuery.getQuizId();
+        var id = UUID.fromString(readQuizQuery.getQuizId());
 
-        // Validate
-        UUID uuid;
-        uuid = UUID.fromString(id);
-
-        // Execute
-        Quiz quiz = quizRepository.getById(uuid);
+        Quiz quiz = quizRepository.getById(id);
         if (quiz == null) {
             throw new QuizNotFoundException();
         }

@@ -8,7 +8,7 @@ import java.util.UUID;
 @Builder
 public record QuizResponse (
     UUID id,
-    List<QuestionResponse> questions,
+    List<UUID> questionIds,
     String title,
     String description
 ) {}
