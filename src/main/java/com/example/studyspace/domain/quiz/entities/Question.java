@@ -29,14 +29,6 @@ public class Question extends Entity {
     public static Question create(String question,
                                   List<String> options,
                                   String correctAnswer) {
-        if (options.size() < 2) {
-            throw new IllegalArgumentException("Question must have at least 2 options");
-        }
-
-        if (!options.contains(correctAnswer)) {
-            throw new IllegalArgumentException("Correct answer must be one of the options");
-        }
-
         return new Question(EntityId.generate(),
                 question,
                 options,

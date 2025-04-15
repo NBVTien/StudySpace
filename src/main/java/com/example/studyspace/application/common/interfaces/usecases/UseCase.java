@@ -1,11 +1,11 @@
-package com.example.studyspace.application.common.interfaces;
+package com.example.studyspace.application.common.interfaces.usecases;
 
 /**
  * Generic interface for all use cases
- * @param <TRequest> The input request type
+ * @param <TRequest> The input request type, must extend UseCaseInput
  * @param <TResponse> The output response type
  */
-public interface UseCase<TRequest, TResponse> {
+public interface UseCase<TRequest extends UseCaseInput<TResponse>, TResponse> {
     
     /**
      * Executes the use case with the given request

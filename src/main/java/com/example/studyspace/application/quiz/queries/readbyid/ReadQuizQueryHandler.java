@@ -1,9 +1,8 @@
-package com.example.studyspace.application.quiz.usecases;
+package com.example.studyspace.application.quiz.queries.readbyid;
 
 import com.example.studyspace.application.common.exceptions.QuizNotFoundException;
-import com.example.studyspace.application.common.interfaces.QuizRepository;
-import com.example.studyspace.application.common.interfaces.UseCase;
-import com.example.studyspace.application.quiz.queries.ReadQuizQuery;
+import com.example.studyspace.application.common.interfaces.repositories.QuizRepository;
+import com.example.studyspace.application.common.interfaces.usecases.UseCase;
 import com.example.studyspace.domain.quiz.Quiz;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,7 @@ public class ReadQuizQueryHandler implements UseCase<ReadQuizQuery, Quiz> {
 
     @Override
     public Quiz execute(ReadQuizQuery readQuizQuery) {
-        var id = readQuizQuery.quizId();
+        var id = readQuizQuery.getQuizId();
 
         // Validate
         UUID uuid;

@@ -1,6 +1,6 @@
 package com.example.studyspace.infrastructure.repositories;
 
-import com.example.studyspace.application.common.interfaces.QuizRepository;
+import com.example.studyspace.application.common.interfaces.repositories.QuizRepository;
 import com.example.studyspace.domain.quiz.Quiz;
 import com.example.studyspace.domain.quiz.entities.Question;
 import org.springframework.stereotype.Repository;
