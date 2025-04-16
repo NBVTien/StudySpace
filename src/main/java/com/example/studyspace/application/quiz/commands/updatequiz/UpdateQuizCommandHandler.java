@@ -1,4 +1,4 @@
-package com.example.studyspace.application.quiz.commands.update;
+package com.example.studyspace.application.quiz.commands.updatequiz;
 
 import com.example.studyspace.application.common.exceptions.QuizNotFoundException;
 import com.example.studyspace.application.common.interfaces.repositories.QuizRepository;

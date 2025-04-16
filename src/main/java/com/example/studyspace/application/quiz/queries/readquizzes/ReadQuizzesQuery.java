@@ -1,4 +1,4 @@
-package com.example.studyspace.application.quiz.queries.readall;
+package com.example.studyspace.application.quiz.queries.readquizzes;
 
 import com.example.studyspace.application.common.interfaces.usecases.UseCaseInput;
 import com.example.studyspace.domain.quiz.Quiz;

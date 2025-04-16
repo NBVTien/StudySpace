@@ -1,4 +1,4 @@
-package com.example.studyspace.application.quiz.queries.readbyid;
+package com.example.studyspace.application.quiz.commands.deletequiz;
 
 import com.example.studyspace.application.common.exceptions.QuizNotFoundException;
 import com.example.studyspace.application.common.interfaces.repositories.QuizRepository;
@@ -9,21 +9,21 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class ReadQuizQueryHandler implements UseCase<ReadQuizQuery, Quiz> {
+public class DeleteQuizCommandHandler implements UseCase<DeleteQuizCommand, Void> {
     private final QuizRepository quizRepository;
 
-    public ReadQuizQueryHandler(QuizRepository quizRepository) {
+    public DeleteQuizCommandHandler(QuizRepository quizRepository) {
         this.quizRepository = quizRepository;
     }
 
     @Override
-    public Quiz execute(ReadQuizQuery readQuizQuery) {
-        var id = UUID.fromString(readQuizQuery.getQuizId());
-
-        Quiz quiz = quizRepository.getById(id);
-        if (quiz == null) {
+    public Void execute(DeleteQuizCommand deleteQuizCommand) {
+        var id = UUID.fromString(deleteQuizCommand.getQuizId());
+        Quiz existingQuiz = quizRepository.getById(id);
+        if (existingQuiz == null) {
             throw new QuizNotFoundException();
         }
-        return quiz;
+        quizRepository.delete(id);
+        return null;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.studyspace.application.quiz.commands.delete;
+package com.example.studyspace.application.quiz.commands.deletequiz;
 
 import com.example.studyspace.application.common.interfaces.usecases.UseCaseInput;
 import lombok.Value;

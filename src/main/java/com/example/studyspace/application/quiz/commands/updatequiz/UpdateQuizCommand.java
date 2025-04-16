@@ -1,4 +1,4 @@
-package com.example.studyspace.application.quiz.commands.update;
+package com.example.studyspace.application.quiz.commands.updatequiz;
 
 import com.example.studyspace.application.common.interfaces.usecases.UseCaseInput;
 import com.example.studyspace.application.quiz.dtos.QuizDto;

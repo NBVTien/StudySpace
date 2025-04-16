@@ -1,4 +1,4 @@
-package com.example.studyspace.application.quiz.queries.readbyid;
+package com.example.studyspace.application.quiz.queries.readquizbyid;
 
 import com.example.studyspace.application.common.interfaces.usecases.UseCaseValidator;
 import org.springframework.stereotype.Component;

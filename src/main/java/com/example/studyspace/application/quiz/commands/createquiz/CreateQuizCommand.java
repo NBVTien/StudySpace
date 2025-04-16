@@ -1,4 +1,4 @@
-package com.example.studyspace.application.quiz.commands.create;
+package com.example.studyspace.application.quiz.commands.createquiz;
 
 import com.example.studyspace.application.common.interfaces.usecases.UseCaseInput;
 import com.example.studyspace.application.quiz.dtos.QuizDto;

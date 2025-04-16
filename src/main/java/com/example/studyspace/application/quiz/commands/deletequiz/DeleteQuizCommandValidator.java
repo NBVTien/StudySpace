@@ -1,5 +1,6 @@
-package com.example.studyspace.application.quiz.commands.update;
+package com.example.studyspace.application.quiz.commands.deletequiz;
 
+import com.example.studyspace.application.common.exceptions.InvalidQuizException;
 import com.example.studyspace.application.common.interfaces.usecases.UseCaseValidator;
 import com.example.studyspace.application.common.models.ErrorMessages;
 import org.springframework.stereotype.Component;
@@ -7,14 +8,14 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-public class UpdateQuizCommandValidator implements UseCaseValidator<UpdateQuizCommand> {
+public class DeleteQuizCommandValidator implements UseCaseValidator<DeleteQuizCommand> {
     @Override
-    public void validate(UpdateQuizCommand command) {
+    public void validate(DeleteQuizCommand command) {
         String id = command.getQuizId();
         try {
             UUID.fromString(id);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(ErrorMessages.INVALID_QUIZ_ID.getMessage());
+            throw new InvalidQuizException(ErrorMessages.INVALID_QUIZ_ID.getMessage());
         }
     }
 }

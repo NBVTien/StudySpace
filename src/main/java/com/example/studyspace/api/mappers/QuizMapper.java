@@ -9,12 +9,6 @@ import com.example.studyspace.api.contracts.quizzes.QuizResponse;
 import java.util.List;
 
 public interface QuizMapper {
-    static Quiz quiz(QuizRequest quizRequest) {
-        return Quiz.create(
-            quizRequest.title(),
-            quizRequest.description()
-        );
-    }
 
     static QuizResponse quizResponse(Quiz quiz) {
         return QuizResponse.builder()

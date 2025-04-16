@@ -10,5 +10,6 @@ public record QuestionResponse(
     UUID id,
     String question,
     List<String> options,
-    String correctAnswer
+    String correctAnswer,
+    UUID quizId
 ) {}

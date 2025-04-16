@@ -1,9 +1,6 @@
-package com.example.studyspace.application.quiz.commands.create;
+package com.example.studyspace.application.quiz.commands.createquiz;
 
 import com.example.studyspace.application.common.interfaces.usecases.UseCaseValidator;
-import com.example.studyspace.application.common.models.ErrorMessages;
-import com.example.studyspace.application.quiz.dtos.QuestionDto;
-import com.example.studyspace.application.quiz.dtos.QuizDto;
 import org.springframework.stereotype.Component;
 
 @Component
