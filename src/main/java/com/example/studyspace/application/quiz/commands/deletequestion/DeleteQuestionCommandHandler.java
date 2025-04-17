@@ -4,20 +4,34 @@ import com.example.studyspace.application.common.exceptions.QuizNotFoundExceptio
 import com.example.studyspace.application.common.interfaces.repositories.QuestionRepository;
 import com.example.studyspace.application.common.interfaces.repositories.QuizRepository;
 import com.example.studyspace.application.common.interfaces.usecases.UseCase;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+/**
+ * Command handler for deleting a question.
+ * This class is responsible for handling the deletion of a question in the system.
+ * It uses the <code>QuizRepository</code> and <code>QuestionRepository</code> to perform the necessary operations.
+ *
+ * @version 1.0
+ */
 @Service
+@AllArgsConstructor
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class DeleteQuestionCommandHandler implements UseCase<DeleteQuestionCommand, Void> {
-    private final QuizRepository quizRepository;
-    private final QuestionRepository questionRepository;
+    QuizRepository quizRepository;
+    QuestionRepository questionRepository;
 
-    public DeleteQuestionCommandHandler(QuizRepository quizRepository, QuestionRepository questionRepository) {
-        this.quizRepository = quizRepository;
-        this.questionRepository = questionRepository;
-    }
-
+    /**
+     * Executes the command to delete a question.
+     *
+     * @param command The command containing the details of the question to be deleted.
+     * @return void
+     * @throws QuizNotFoundException if the quiz or question is not found.
+     */
     @Override
     public Void execute(DeleteQuestionCommand command) {
         var questionId = UUID.fromString(command.getQuestionId());
