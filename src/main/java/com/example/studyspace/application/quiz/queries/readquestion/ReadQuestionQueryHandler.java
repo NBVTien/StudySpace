@@ -4,18 +4,32 @@ import com.example.studyspace.application.common.exceptions.QuestionNotFoundExce
 import com.example.studyspace.application.common.interfaces.repositories.QuestionRepository;
 import com.example.studyspace.application.common.interfaces.usecases.UseCase;
 import com.example.studyspace.domain.quiz.entities.Question;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+/**
+ * Query handler for reading a question.
+ * This class is responsible for handling the retrieval of a question from the system.
+ * It uses the <code>QuestionRepository</code> to fetch the question from the database.
+ *
+ * @version 1.0
+ */
 @Service
+@RequiredArgsConstructor
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class ReadQuestionQueryHandler implements UseCase<ReadQuestionQuery, Question> {
-    private final QuestionRepository questionRepository;
+    QuestionRepository questionRepository;
 
-    public ReadQuestionQueryHandler(QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
-    }
-
+    /**
+     * Executes the query to read a question.
+     *
+     * @param query The query containing the details of the question to be read.
+     * @return The <code>Question</code> object if found, otherwise throws <code>QuestionNotFoundException</code>.
+     */
     @Override
     public Question execute(ReadQuestionQuery query) {
         var id = UUID.fromString(query.getQuestionId());

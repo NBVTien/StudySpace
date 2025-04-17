@@ -7,6 +7,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Query handler for reading quizzes.
+ * This class is responsible for handling the ReadQuizzesQuery and returning a list of quizzes.
+ *
+ * @version 1.0
+ */
 @Service
 public class ReadQuizzesQueryHandler implements UseCase<ReadQuizzesQuery, List<Quiz>> {
 
@@ -16,8 +22,14 @@ public class ReadQuizzesQueryHandler implements UseCase<ReadQuizzesQuery, List<Q
         this.quizRepository = quizRepository;
     }
 
+    /**
+     * Handles the ReadQuizzesQuery and returns a list of quizzes.
+     *
+     * @param query The query containing the parameters for reading quizzes.
+     * @return A list of quizzes.
+     */
     @Override
-    public List<Quiz> execute(ReadQuizzesQuery readQuizQuery) {
+    public List<Quiz> execute(ReadQuizzesQuery query) {
         return quizRepository.getAll();
     }
 }

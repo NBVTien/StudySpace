@@ -4,6 +4,7 @@ import com.example.studyspace.application.common.exceptions.QuizNotFoundExceptio
 import com.example.studyspace.application.common.interfaces.repositories.QuestionRepository;
 import com.example.studyspace.application.common.interfaces.repositories.QuizRepository;
 import com.example.studyspace.application.common.interfaces.usecases.UseCase;
+import com.example.studyspace.domain.quiz.Quiz;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -37,7 +38,8 @@ public class DeleteQuestionCommandHandler implements UseCase<DeleteQuestionComma
         var questionId = UUID.fromString(command.getQuestionId());
         var quizId = UUID.fromString(command.getQuizId());
 
-        if (quizRepository.getById(quizId) == null) {
+        Quiz quiz = quizRepository.getById(quizId);
+        if (quiz == null) {
             throw new QuizNotFoundException();
         }
 
@@ -49,6 +51,8 @@ public class DeleteQuestionCommandHandler implements UseCase<DeleteQuestionComma
             throw new QuizNotFoundException();
         }
 
+        quiz.removeQuestion(question.getId());
+        quizRepository.update(quizId, quiz);
         questionRepository.delete(questionId);
         return null;
     }

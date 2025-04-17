@@ -6,6 +6,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
+/**
+ * Validator for the <code>UpdateQuizCommand</code>.
+ * This class is responsible for validating the input parameters of the UpdateQuizCommand.
+ * It checks if the quiz ID is a valid UUID format.
+ *
+ * @version 1.0
+ */
 @Component
 public class UpdateQuizCommandValidator implements UseCaseValidator<UpdateQuizCommand> {
     @Override

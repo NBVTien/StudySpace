@@ -13,7 +13,7 @@ import com.example.studyspace.application.quiz.commands.updatequestion.UpdateQue
 import com.example.studyspace.application.quiz.commands.updatequiz.UpdateQuizCommand;
 import com.example.studyspace.application.quiz.queries.readquestion.ReadQuestionQuery;
 import com.example.studyspace.application.quiz.queries.readquestions.ReadQuestionsQuery;
-import com.example.studyspace.application.quiz.queries.readquizbyid.ReadQuizQuery;
+import com.example.studyspace.application.quiz.queries.readquiz.ReadQuizQuery;
 import com.example.studyspace.application.quiz.queries.readquizzes.ReadQuizzesQuery;
 import com.example.studyspace.domain.quiz.Quiz;
 import com.example.studyspace.api.contracts.quizzes.QuizResponse;
