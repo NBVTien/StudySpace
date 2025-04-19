@@ -5,67 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41f51630-57df-46ca-b2be-a9aa6decd738" name="Changes" comment="doc: Documentation code &amp; small fix (part 2)">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/ApplicationConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/StudyspaceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/api/contracts/quizzes/QuestionRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/api/contracts/quizzes/QuestionResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/api/contracts/quizzes/QuizRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/api/contracts/quizzes/QuizResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/api/controllers/GlobalExceptionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/api/controllers/QuizController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/api/mappers/QuestionMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/api/mappers/QuizMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/common/exceptions/InvalidQuizException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/common/exceptions/NotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/common/exceptions/QuestionNotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/common/exceptions/QuizNotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/common/interfaces/repositories/QuestionRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/common/interfaces/repositories/QuizRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/common/interfaces/usecases/UseCase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/common/interfaces/usecases/UseCaseInput.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/common/interfaces/usecases/UseCaseValidator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/common/models/ErrorMessages.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/common/services/UseCaseMediator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/commands/createquestion/CreateQuestionCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/commands/createquestion/CreateQuestionCommandHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/commands/createquestion/CreateQuestionCommandValidator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/commands/createquiz/CreateQuizCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/commands/createquiz/CreateQuizCommandHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/commands/createquiz/CreateQuizCommandValidator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/commands/deletequestion/DeleteQuestionCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/commands/deletequestion/DeleteQuestionCommandHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/commands/deletequiz/DeleteQuizCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/commands/deletequiz/DeleteQuizCommandHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/commands/deletequiz/DeleteQuizCommandValidator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/commands/updatequestion/UpdateQuestionCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/commands/updatequestion/UpdateQuestionCommandHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/commands/updatequiz/UpdateQuizCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/commands/updatequiz/UpdateQuizCommandHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/commands/updatequiz/UpdateQuizCommandValidator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/dtos/QuestionDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/dtos/QuizDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/queries/readquestion/ReadQuestionQuery.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/queries/readquestion/ReadQuestionQueryHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/queries/readquestions/ReadQuestionsQuery.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/queries/readquestions/ReadQuestionsQueryHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/queries/readquiz/ReadQuizQuery.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/queries/readquiz/ReadQuizQueryHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/queries/readquiz/ReadQuizQueryValidator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/queries/readquizzes/ReadQuizzesQuery.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/application/quiz/queries/readquizzes/ReadQuizzesQueryHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/domain/common/models/Entity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/domain/common/models/EntityId.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/domain/quiz/Quiz.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/domain/quiz/entities/Question.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/infrastructure/repositories/InMemoryQuestionRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studyspace/infrastructure/repositories/InMemoryQuizRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/studyspace/StudyspaceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,6 +62,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.StudyspaceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
