@@ -1,75 +1,83 @@
+import { BookOpen, Medal, Users } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { Link } from '@/components/ui/link';
-import { paths } from '@/config/paths';
-import { checkLoggedIn } from '@/utils/auth';
 
 const HomePage = () => {
-  const isLoggedIn = checkLoggedIn();
-
   return (
-    <div className="flex h-screen items-center bg-white">
-      <div className="mx-auto max-w-7xl px-4 py-12 text-center sm:px-6 lg:px-8 lg:py-16">
-        <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          <span className="block">Bulletproof React</span>
-        </h2>
-        <img src="/logo.svg" alt="react" />
-        <p>Showcasing Best Practices For Building React Applications</p>
-        <div className="mt-8 flex justify-center">
-          <div className="inline-flex rounded-md shadow">
-            <Link
-              href={
-                isLoggedIn
-                  ? paths.app.root.getHref()
-                  : paths.auth.login.getHref()
-              }
-            >
-              <Button
-                icon={
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="size-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                    />
-                  </svg>
-                }
-              >
-                Get started
-              </Button>
-            </Link>
-          </div>
-          <div className="ml-3 inline-flex">
-            <a
-              href="https://github.com/alan2207/bulletproof-react"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Button
-                variant="outline"
-                icon={
-                  <svg
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    className="size-6"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                }
-              >
-                Github Repo
-              </Button>
-            </a>
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <div className="absolute inset-0">
+        <div className="absolute -left-4 top-20 size-72 animate-blob rounded-full bg-purple-100 opacity-70 mix-blend-multiply blur-xl"></div>
+        <div className="animation-delay-2000 absolute -right-4 top-40 size-72 animate-blob rounded-full bg-yellow-100 opacity-70 mix-blend-multiply blur-xl"></div>
+        <div className="animation-delay-4000 absolute -bottom-8 left-20 size-72 animate-blob rounded-full bg-pink-100 opacity-70 mix-blend-multiply blur-xl"></div>
+      </div>
+
+      {/* Main content */}
+      <div className="relative h-full">
+        <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-7xl">
+              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+                StudySpace
+              </span>
+            </h1>
+            <p className="mt-6 text-xl leading-8 text-gray-600 sm:text-2xl">
+              Your collaborative learning platform where knowledge meets
+              community
+            </p>
+            <div className="mt-10 flex items-center justify-center gap-6">
+              <Link href="/register">
+                <Button
+                  variant="default"
+                  size="lg"
+                  className="animate-bounce-subtle"
+                >
+                  Get Started
+                </Button>
+              </Link>
+              <Link href="/login">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="hover:bg-gray-50"
+                >
+                  Login
+                </Button>
+              </Link>
+            </div>
+
+            {/* Feature highlights */}
+            <div className="mt-20 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="rounded-xl bg-white/50 p-6 backdrop-blur-sm">
+                <div className="text-blue-600">
+                  <Users className="mx-auto size-8" />
+                </div>
+                <h3 className="mt-4 text-lg font-semibold">
+                  Collaborative Learning
+                </h3>
+                <p className="mt-2 text-gray-600">
+                  Connect with peers and learn together
+                </p>
+              </div>
+              <div className="rounded-xl bg-white/50 p-6 backdrop-blur-sm">
+                <div className="text-purple-600">
+                  <BookOpen className="mx-auto size-8" />
+                </div>
+                <h3 className="mt-4 text-lg font-semibold">Rich Resources</h3>
+                <p className="mt-2 text-gray-600">
+                  Access comprehensive study materials and guides
+                </p>
+              </div>
+              <div className="rounded-xl bg-white/50 p-6 backdrop-blur-sm sm:col-span-2 lg:col-span-1">
+                <div className="text-indigo-600">
+                  <Medal className="mx-auto size-8" />
+                </div>
+                <h3 className="mt-4 text-lg font-semibold">Track Progress</h3>
+                <p className="mt-2 text-gray-600">
+                  Monitor your learning journey with detailed analytics
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

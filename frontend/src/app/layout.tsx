@@ -6,8 +6,6 @@ import {
 import { ReactNode } from 'react';
 
 import { AppProvider } from '@/app/provider';
-import { getUserQueryOptions } from '@/lib/auth';
-
 import '@/styles/globals.css';
 
 export const metadata = {
@@ -17,8 +15,6 @@ export const metadata = {
 
 const RootLayout = async ({ children }: { children: ReactNode }) => {
   const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery(getUserQueryOptions());
 
   const dehydratedState = dehydrate(queryClient);
 
