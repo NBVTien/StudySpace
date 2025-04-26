@@ -1,7 +1,7 @@
 package com.example.studyspace.infrastructure.repositories;
 
 import com.example.studyspace.application.common.interfaces.repositories.UserRepository;
-import com.example.studyspace.domain.user.AppUser;
+import com.example.studyspace.domain.user.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
@@ -11,14 +11,14 @@ import java.util.UUID;
 
 @Repository
 public class InMemoryUserRepository implements UserRepository {
-    private List<AppUser> users = new ArrayList<>(List.of(
-        AppUser.create(
+    private List<User> users = new ArrayList<>(List.of(
+        User.create(
             "admin",
             new BCryptPasswordEncoder().encode("123"),
             "admin@email.com",
             "Admin"
         ),
-        AppUser.create(
+        User.create(
             "user",
             new BCryptPasswordEncoder().encode("123"),
             "user@email.com",
@@ -27,7 +27,7 @@ public class InMemoryUserRepository implements UserRepository {
     ));
 
     @Override
-    public AppUser getById(UUID id) {
+    public User getById(UUID id) {
         return users.stream()
             .filter(user -> user.getId().getValue().equals(id))
             .findFirst()
@@ -35,27 +35,27 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public void save(AppUser user) {
+    public void save(User user) {
         users.add(user);
     }
 
     @Override
-    public void update(UUID id, AppUser user) {
-        AppUser existingUser = getById(id);
+    public void update(UUID id, User user) {
+        User existingUser = getById(id);
         users.remove(existingUser);
         users.add(user);
     }
 
     @Override
     public void delete(UUID id) {
-        AppUser user = getById(id);
+        User user = getById(id);
         if (user != null) {
             users.remove(user);
         }
     }
 
     @Override
-    public AppUser getByUsername(String username) {
+    public User getByUsername(String username) {
         return users.stream()
             .filter(user -> user.getUsername().equals(username))
             .findFirst()

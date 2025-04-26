@@ -14,7 +14,7 @@ public class JwtUtils {
         return Jwts
                 .builder()
                 .subject(user.getUsername())
-                .expiration(new Date(System.currentTimeMillis() + 300_000)) // 5 minutes
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24)) // 1 day
                 .signWith(getSigningKey())
                 .compact();
     }
@@ -28,7 +28,7 @@ public class JwtUtils {
                 .getPayload();
     }
 
-    public static boolean isValid(String token) {
+    public static boolean isTokenValid(String token) {
         return !isExpired(token);
     }
 

@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * @version 1.0
  */
 @Getter
-public class AppUser extends Entity {
+public class User extends Entity {
 
     /**
      * The username of the user.
@@ -35,13 +35,13 @@ public class AppUser extends Entity {
      */
     private String fullName;
 
-    protected AppUser(EntityId id,
-                      String username,
-                      String password,
-                      String email,
-                      String fullName,
-                      LocalDateTime createdAt,
-                      LocalDateTime updatedAt) {
+    protected User(EntityId id,
+                   String username,
+                   String password,
+                   String email,
+                   String fullName,
+                   LocalDateTime createdAt,
+                   LocalDateTime updatedAt) {
         super(id, createdAt, updatedAt);
         this.username = username;
         this.password = password;
@@ -58,11 +58,11 @@ public class AppUser extends Entity {
      * @param fullName  The full name of the user.
      * @return A new User object.
      */
-    public static AppUser create(String username,
-                                 String password,
-                                 String email,
-                                 String fullName) {
-        return new AppUser(EntityId.generate(),
+    public static User create(String username,
+                              String password,
+                              String email,
+                              String fullName) {
+        return new User(EntityId.generate(),
                 username,
                 password,
                 email,

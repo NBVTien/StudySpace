@@ -1,6 +1,6 @@
 package com.example.studyspace.application.common.interfaces.repositories;
 
-import com.example.studyspace.domain.user.AppUser;
+import com.example.studyspace.domain.user.User;
 
 import java.util.UUID;
 
@@ -19,7 +19,7 @@ public interface UserRepository {
      * @return The <code>User</code> object associated with the specified ID.
      *
      */
-    AppUser getById(UUID id);
+    User getById(UUID id);
 
     /**
      * Saves a new user to the data store.
@@ -27,7 +27,7 @@ public interface UserRepository {
      * @param user The <code>User</code> object to be saved.
      *
      */
-    void save(AppUser user);
+    void save(User user);
 
     /**
      * Updates an existing user in the data store.
@@ -36,7 +36,7 @@ public interface UserRepository {
      * @param user The <code>User</code> object with updated values.
      *
      */
-    void update(UUID id, AppUser user);
+    void update(UUID id, User user);
 
     /**
      * Deletes a user from the data store.
@@ -53,5 +53,5 @@ public interface UserRepository {
      * @return The <code>User</code> object associated with the specified username.
      *
      */
-    AppUser getByUsername(String username);
+    User getByUsername(String username);
 }
