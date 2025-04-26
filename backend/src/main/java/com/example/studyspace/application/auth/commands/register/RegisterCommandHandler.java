@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal=true, level= AccessLevel.PRIVATE)
 public class RegisterCommandHandler implements UseCase<RegisterCommand, User> {
-
     PasswordEncoder passwordEncoder;
     UserRepository userRepository;
 
@@ -21,8 +20,8 @@ public class RegisterCommandHandler implements UseCase<RegisterCommand, User> {
     public User execute(RegisterCommand registerCommand) {
         User user = User.create(
             registerCommand.getUserDto().username(),
-            registerCommand.getUserDto().email(),
             passwordEncoder.encode(registerCommand.getUserDto().password()),
+            registerCommand.getUserDto().email(),
             registerCommand.getUserDto().fullName()
         );
 
