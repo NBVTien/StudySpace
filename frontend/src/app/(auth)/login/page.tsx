@@ -3,8 +3,7 @@
 import { useSearchParams, useRouter } from 'next/navigation';
 
 import { paths } from '@/config/paths';
-
-import { LoginForm } from './_components/login-form';
+import { LoginForm } from '@/features/auth/components/login-form';
 
 const LoginPage = () => {
   const router = useRouter();

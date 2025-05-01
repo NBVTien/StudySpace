@@ -22,7 +22,7 @@ import java.util.List;
 @Configuration
 public class SecurityConfiguration {
 
-    @Value("${CLIENT_URL}")
+    @Value("${client-url}")
     private String clientUrl;
 
     @Bean
@@ -41,7 +41,7 @@ public class SecurityConfiguration {
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> {
-                    authorize.requestMatchers("/api/auth/**").permitAll();
+                    authorize.requestMatchers("/auth/**").permitAll();
                     authorize.anyRequest().authenticated();
                 })
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)

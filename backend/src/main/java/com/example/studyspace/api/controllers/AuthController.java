@@ -18,15 +18,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal=true, level= AccessLevel.PRIVATE)
 public class AuthController {
@@ -45,10 +42,10 @@ public class AuthController {
             applicationUser.getPassword(),
             new ArrayList<>()
         );
-        String jwtToken = JwtUtils.generateToken(user);
+        String jwtToken = JwtUtils.generateToken(user, applicationUser.getId().getValue().toString());
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Set-Cookie", "authorization=" + jwtToken + "; HttpOnly");
+        headers.add("Set-Cookie", "authorization=" + jwtToken + "; Path=/; HttpOnly");
 
         var response = AuthMapper.toAuthResponse(applicationUser, jwtToken);
         return ResponseEntity.ok().headers(headers).body(response);
@@ -61,17 +58,31 @@ public class AuthController {
         Authentication authentication = authenticationManager.authenticate(token);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String jwtToken = JwtUtils.generateToken((User) authentication.getPrincipal());
-
         var user = ((User) authentication.getPrincipal());
         var query = new ReadUserByUsernameQuery(user.getUsername());
         var applicationUser = mediator.execute(query);
 
+        String jwtToken = JwtUtils.generateToken(user, applicationUser.getId().getValue().toString());
+
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Set-Cookie", "authorization=" + jwtToken + "; HttpOnly");
+        headers.add("Set-Cookie", "authorization=" + jwtToken + "; Path=/; HttpOnly");
 
         var response = AuthMapper.toAuthResponse(applicationUser, jwtToken);
         return ResponseEntity.ok().headers(headers).body(response);
     }
 
+    @GetMapping("/me")
+    public ResponseEntity<AuthResponse> me() {
+        var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        var query = new ReadUserByUsernameQuery(user.getUsername());
+        var applicationUser = mediator.execute(query);
+
+        String jwtToken = JwtUtils.generateToken(user, applicationUser.getId().getValue().toString());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Set-Cookie", "authorization=" + jwtToken + "; Path=/; HttpOnly");
+
+        var response = AuthMapper.toAuthResponse(applicationUser, jwtToken);
+        return ResponseEntity.ok().headers(headers).body(response);
+    }
 }

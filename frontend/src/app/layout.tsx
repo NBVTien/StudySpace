@@ -9,8 +9,7 @@ import { AppProvider } from '@/app/provider';
 import '@/styles/globals.css';
 
 export const metadata = {
-  title: 'Bulletproof React',
-  description: 'Showcasing Best Practices For Building React Applications',
+  title: 'StudySpace',
 };
 
 const RootLayout = async ({ children }: { children: ReactNode }) => {

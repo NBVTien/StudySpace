@@ -13,4 +13,6 @@ import java.util.List;
  * @version 1.0
  */
 @Value
-public class ReadQuizzesQuery implements UseCaseInput<List<Quiz>> {}
+public class ReadQuizzesQuery implements UseCaseInput<List<Quiz>> {
+    String ownerId;
+}

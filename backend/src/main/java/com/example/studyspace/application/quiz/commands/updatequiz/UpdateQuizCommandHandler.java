@@ -42,7 +42,10 @@ public class UpdateQuizCommandHandler implements UseCase<UpdateQuizCommand, Quiz
 
         quiz.update(
             quizDto.title(),
-            quizDto.description()
+            quizDto.description(),
+            quizDto.difficulty(),
+            quizDto.estimatedTimeInMinutes(),
+            quizDto.tags()
         );
         quizRepository.update(id, quiz);
         return quiz;

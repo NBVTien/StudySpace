@@ -34,8 +34,8 @@ public class GlobalExceptionHandler {
      * @return A ProblemDetail object with the status and detail message.
      *
      */
-    @ExceptionHandler(Exception.class)
-    public ProblemDetail handleGenericException(Exception e) {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ProblemDetail handleGenericException(Exception e) {
+//        return ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+//    }
 }

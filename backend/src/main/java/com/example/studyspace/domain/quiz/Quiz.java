@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a quiz in the system.
@@ -28,6 +29,22 @@ public class Quiz extends Entity {
      * The description of the quiz.
      */
     private String description;
+    /**
+     * The difficulty level of the quiz.
+     */
+    private String difficulty;
+    /**
+     * The estimated time to complete the quiz in minutes.
+     */
+    private int estimatedTimeInMinutes;
+    /**
+     * The tags associated with the quiz.
+     */
+    private List<String> tags;
+    /**
+     * The ID of the owner of the quiz.
+     */
+    private final EntityId ownerId;
 
     /**
      * Constructor for creating a new Quiz object.
@@ -38,15 +55,25 @@ public class Quiz extends Entity {
      * @param createdAt   The creation timestamp of the quiz.
      * @param updatedAt   The last updated timestamp of the quiz.
      */
-    protected Quiz(EntityId id,
-                   String title,
-                   String description,
-                   LocalDateTime createdAt,
-                   LocalDateTime updatedAt) {
+    protected Quiz(
+        EntityId id,
+        String title,
+        String description,
+        String difficulty,
+        int estimatedTimeInMinutes,
+        List<String> tags,
+        EntityId ownerId,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
+    ) {
         super(id, createdAt, updatedAt);
         this.questionIds = new ArrayList<>();
         this.title = title;
         this.description = description;
+        this.difficulty = difficulty;
+        this.estimatedTimeInMinutes = estimatedTimeInMinutes;
+        this.tags = tags;
+        this.ownerId = ownerId;
     }
 
     /**
@@ -56,11 +83,21 @@ public class Quiz extends Entity {
      * @param description The description of the quiz.
      * @return A new Quiz object.
      */
-    public static Quiz create(String title,
-                              String description) {
+    public static Quiz create(
+        String title,
+        String description,
+        String difficulty,
+        int estimatedTimeInMinutes,
+        List<String> tags,
+        EntityId ownerId
+    ) {
         return new Quiz(EntityId.generate(),
                 title,
                 description,
+                difficulty,
+                estimatedTimeInMinutes,
+                tags,
+                ownerId,
                 LocalDateTime.now(),
                 LocalDateTime.now());
     }
@@ -71,10 +108,18 @@ public class Quiz extends Entity {
      * @param title       The new title of the quiz.
      * @param description The new description of the quiz.
      */
-    public void update(String title,
-                       String description) {
+    public void update(
+        String title,
+        String description,
+        String difficulty,
+        int estimatedTimeInMinutes,
+        List<String> tags
+    ) {
         this.title = title;
         this.description = description;
+        this.difficulty = difficulty;
+        this.estimatedTimeInMinutes = estimatedTimeInMinutes;
+        this.tags = tags;
         super.update();
     }
 

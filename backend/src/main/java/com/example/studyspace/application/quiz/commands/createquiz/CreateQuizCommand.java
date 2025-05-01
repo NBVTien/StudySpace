@@ -14,4 +14,5 @@ import lombok.Value;
 @Value
 public class CreateQuizCommand implements UseCaseInput<Quiz> {
     QuizDto quizDto;
+    String ownerId;
 }

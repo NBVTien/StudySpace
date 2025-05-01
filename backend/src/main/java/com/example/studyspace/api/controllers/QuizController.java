@@ -23,6 +23,8 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,7 +36,7 @@ import java.util.List;
  * @version 1.0
  */
 @RestController
-@RequestMapping("/api/quizzes")
+@RequestMapping("/quizzes")
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal=true, level= AccessLevel.PRIVATE)
 public class QuizController {
@@ -51,7 +53,10 @@ public class QuizController {
      */
     @GetMapping()
     public ResponseEntity<List<QuizResponse>> getAllQuizzes() {
-        var query = new ReadQuizzesQuery();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = (String) authentication.getDetails();
+
+        var query = new ReadQuizzesQuery(userId);
         List<Quiz> quizzes = mediator.execute(query);
         return ResponseEntity.ok(QuizMapper.quizResponses(quizzes));
     }
@@ -80,7 +85,11 @@ public class QuizController {
     @PostMapping()
     public ResponseEntity<QuizResponse> createQuiz(@RequestBody QuizRequest request) {
         var quizDto = QuizMapper.quizDto(request);
-        var command = new CreateQuizCommand(quizDto);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = (String) authentication.getDetails();
+
+        var command = new CreateQuizCommand(quizDto, userId);
         var response = QuizMapper.quizResponse(mediator.execute(command));
         return ResponseEntity.status(201).body(response);
     }

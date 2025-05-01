@@ -26,11 +26,12 @@ public interface QuizMapper {
     static QuizResponse quizResponse(Quiz quiz) {
         return QuizResponse.builder()
             .id(quiz.getId().getValue())
-            .questionIds(quiz.getQuestionIds().stream()
-                .map(EntityId::getValue)
-                .toList())
+            .questionCount(quiz.getQuestionIds().size())
             .title(quiz.getTitle())
             .description(quiz.getDescription())
+            .difficulty(quiz.getDifficulty())
+            .estimatedTimeInMinutes(quiz.getEstimatedTimeInMinutes())
+            .tags(quiz.getTags())
             .build();
     }
 
@@ -58,6 +59,9 @@ public interface QuizMapper {
         return QuizDto.builder()
             .title(quizRequest.title())
             .description(quizRequest.description())
+            .difficulty(quizRequest.difficulty())
+            .estimatedTimeInMinutes(quizRequest.estimatedTimeInMinutes())
+            .tags(quizRequest.tags())
             .build();
     }
 }

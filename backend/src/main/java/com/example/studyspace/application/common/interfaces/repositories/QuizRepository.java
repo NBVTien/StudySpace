@@ -21,6 +21,15 @@ public interface QuizRepository {
     List<Quiz> getAll();
 
     /**
+     * Retrieves all quizzes owned by a specific user.
+     *
+     * @param ownerId The unique identifier of the user who owns the quizzes.
+     * @return A list of <code>Quiz</code> objects owned by the specified user.
+     *
+     */
+    List<Quiz> getAllByOwnerId(UUID ownerId);
+
+    /**
      * Retrieves a quiz by its unique identifier.
      *
      * @param id The unique identifier of the quiz.

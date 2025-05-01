@@ -6,6 +6,7 @@ import com.example.studyspace.domain.quiz.Quiz;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Query handler for reading quizzes.
@@ -30,6 +31,6 @@ public class ReadQuizzesQueryHandler implements UseCase<ReadQuizzesQuery, List<Q
      */
     @Override
     public List<Quiz> execute(ReadQuizzesQuery query) {
-        return quizRepository.getAll();
+        return quizRepository.getAllByOwnerId(UUID.fromString(query.getOwnerId()));
     }
 }

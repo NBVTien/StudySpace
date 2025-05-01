@@ -11,7 +11,7 @@ const createEnv = () => {
       .optional(),
     APP_URL: z.string().optional().default('http://localhost:3000'),
     APP_MOCK_API_PORT: z.string().optional().default('8080'),
-    TOKEN_COOKIE_NAME: z.string().optional().default('token'),
+    TOKEN_COOKIE_NAME: z.string().optional().default('authorization'),
   });
 
   const envVars = {
@@ -19,7 +19,7 @@ const createEnv = () => {
     ENABLE_API_MOCKING: process.env.NEXT_PUBLIC_ENABLE_API_MOCKING,
     APP_URL: process.env.NEXT_PUBLIC_URL,
     APP_MOCK_API_PORT: process.env.NEXT_PUBLIC_MOCK_API_PORT,
-    TOKEN_COOKIE_NAME: process.env.TOKEN_HEADER_COOKIE_NAME,
+    TOKEN_COOKIE_NAME: process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME,
   };
 
   const parsedEnv = EnvSchema.safeParse(envVars);
@@ -35,7 +35,7 @@ const createEnv = () => {
     );
   }
 
-  return parsedEnv.data ?? {};
+  return parsedEnv.data;
 };
 
 export const env = createEnv();

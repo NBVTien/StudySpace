@@ -10,13 +10,13 @@ import javax.crypto.SecretKey;
 import java.util.Date;
 
 public class JwtUtils {
-    public static String generateToken(User user) {
-        return Jwts
-                .builder()
-                .subject(user.getUsername())
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24)) // 1 day
-                .signWith(getSigningKey())
-                .compact();
+    public static String generateToken(User user, String userId) {
+        var builder = Jwts.builder();
+        builder.claim("sub", user.getUsername());
+        builder.claim("userId", userId);
+        builder.expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24)); // 1 day
+        builder.signWith(getSigningKey());
+        return builder.compact();
     }
 
     public static Claims getClaims(String token) {
@@ -34,6 +34,10 @@ public class JwtUtils {
 
     public static boolean isExpired(String token) {
         return getClaims(token).getExpiration().before(new Date());
+    }
+
+    public static String getUserId(String token) {
+        return  getClaims(token).get("userId", String.class);
     }
 
     private static SecretKey getSigningKey() {
