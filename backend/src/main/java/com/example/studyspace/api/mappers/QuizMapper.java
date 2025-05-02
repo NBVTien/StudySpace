@@ -1,7 +1,6 @@
 package com.example.studyspace.api.mappers;
 
 import com.example.studyspace.application.quiz.dtos.QuizDto;
-import com.example.studyspace.domain.common.models.EntityId;
 import com.example.studyspace.domain.quiz.Quiz;
 import com.example.studyspace.api.contracts.quizzes.QuizRequest;
 import com.example.studyspace.api.contracts.quizzes.QuizResponse;

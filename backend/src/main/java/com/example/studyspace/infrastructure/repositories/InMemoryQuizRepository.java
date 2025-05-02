@@ -11,11 +11,9 @@ import java.util.UUID;
 
 @Repository
 public class InMemoryQuizRepository implements QuizRepository {
-    private final UserRepository userRepository;
     private final List<Quiz> quizzes = new ArrayList<>();
 
     public InMemoryQuizRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
 
         quizzes.add(Quiz.create(
             new ArrayList<>(),
@@ -24,7 +22,7 @@ public class InMemoryQuizRepository implements QuizRepository {
             "Easy",
             10,
             List.of("math", "easy"),
-            this.userRepository.getByUsername("admin").getId()
+            userRepository.getByUsername("admin").getId()
         ));
         quizzes.add(Quiz.create(
             new ArrayList<>(),
@@ -33,7 +31,7 @@ public class InMemoryQuizRepository implements QuizRepository {
             "Medium",
             15,
             List.of("science", "medium"),
-            this.userRepository.getByUsername("admin").getId()
+            userRepository.getByUsername("admin").getId()
         ));
         quizzes.add(Quiz.create(
             new ArrayList<>(),
@@ -42,7 +40,7 @@ public class InMemoryQuizRepository implements QuizRepository {
             "Hard",
             20,
             List.of("history", "hard"),
-            this.userRepository.getByUsername("user").getId()
+            userRepository.getByUsername("user").getId()
         ));
     }
 
@@ -64,11 +62,10 @@ public class InMemoryQuizRepository implements QuizRepository {
 
     @Override
     public Quiz getById(UUID id) {
-        Quiz quiz = quizzes.stream()
+        return quizzes.stream()
             .filter(q -> q.getId().getValue().equals(id))
             .findFirst()
             .orElse(null);
-        return quiz;
     }
 
     @Override
