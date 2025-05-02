@@ -26,7 +26,7 @@ public interface QuizMapper {
     static QuizResponse quizResponse(Quiz quiz) {
         return QuizResponse.builder()
             .id(quiz.getId().getValue())
-            .questionCount(quiz.getQuestionIds().size())
+            .questionCount(quiz.getQuestions().size())
             .title(quiz.getTitle())
             .description(quiz.getDescription())
             .difficulty(quiz.getDifficulty())
@@ -57,6 +57,7 @@ public interface QuizMapper {
      */
     static QuizDto quizDto(QuizRequest quizRequest) {
         return QuizDto.builder()
+            .questions(quizRequest.questions())
             .title(quizRequest.title())
             .description(quizRequest.description())
             .difficulty(quizRequest.difficulty())

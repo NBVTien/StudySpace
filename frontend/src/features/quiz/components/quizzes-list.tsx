@@ -1,31 +1,8 @@
 import { useQuizzes } from '@/features/quiz/api/get-quizzes';
 import QuizCard from '@/features/quiz/components/quiz-card';
 
-// const quizzes: Quiz[] = [
-//   {
-//     id: '1',
-//     title: 'Java Fundamentals',
-//     description:
-//       'Test your knowledge of Java basics including syntax, OOP concepts, and standard libraries.',
-//     questionCount: 15,
-//     difficulty: 'Medium',
-//     estimatedTimeInMinutes: 20,
-//     tags: ['Java', 'Programming', 'Basics'],
-//   },
-//   {
-//     id: '2',
-//     title: 'Data Structures',
-//     description:
-//       'A comprehensive quiz on arrays, linked lists, trees, graphs, and their implementations.',
-//     questionCount: 20,
-//     difficulty: 'Hard',
-//     estimatedTimeInMinutes: 35,
-//     tags: ['DSA', 'Algorithms', 'Computer Science'],
-//   },
-// ];
-
 const QuizzesList = ({ searchTerm }: { searchTerm: string }) => {
-  const quizzesQuery = useQuizzes({});
+  const quizzesQuery = useQuizzes();
 
   if (quizzesQuery.isLoading) {
     return <div>Loading...</div>;

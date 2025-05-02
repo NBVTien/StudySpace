@@ -2,6 +2,7 @@ package com.example.studyspace.domain.quiz;
 
 import com.example.studyspace.domain.common.models.Entity;
 import com.example.studyspace.domain.common.models.EntityId;
+import com.example.studyspace.domain.quiz.valueobjects.Question;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -20,7 +21,7 @@ public class Quiz extends Entity {
     /**
      * The list of question IDs associated with the quiz.
      */
-    private final ArrayList<EntityId> questionIds;
+    private final ArrayList<Question> questions;
     /**
      * The title of the quiz.
      */
@@ -57,6 +58,7 @@ public class Quiz extends Entity {
      */
     protected Quiz(
         EntityId id,
+        ArrayList<Question> questions,
         String title,
         String description,
         String difficulty,
@@ -67,7 +69,7 @@ public class Quiz extends Entity {
         LocalDateTime updatedAt
     ) {
         super(id, createdAt, updatedAt);
-        this.questionIds = new ArrayList<>();
+        this.questions = questions;
         this.title = title;
         this.description = description;
         this.difficulty = difficulty;
@@ -84,6 +86,7 @@ public class Quiz extends Entity {
      * @return A new Quiz object.
      */
     public static Quiz create(
+        ArrayList<Question> questions,
         String title,
         String description,
         String difficulty,
@@ -92,6 +95,7 @@ public class Quiz extends Entity {
         EntityId ownerId
     ) {
         return new Quiz(EntityId.generate(),
+                questions,
                 title,
                 description,
                 difficulty,
@@ -109,35 +113,20 @@ public class Quiz extends Entity {
      * @param description The new description of the quiz.
      */
     public void update(
+        ArrayList<Question> questions,
         String title,
         String description,
         String difficulty,
         int estimatedTimeInMinutes,
         List<String> tags
     ) {
+        this.questions.clear();
+        this.questions.addAll(questions);
         this.title = title;
         this.description = description;
         this.difficulty = difficulty;
         this.estimatedTimeInMinutes = estimatedTimeInMinutes;
         this.tags = tags;
         super.update();
-    }
-
-    /**
-     * This method adds a question ID to the quiz.
-     *
-     * @param questionId The ID of the question to be added.
-     */
-    public void addQuestion(EntityId questionId) {
-        this.questionIds.add(questionId);
-    }
-
-    /**
-     * This method removes a question ID from the quiz.
-     *
-     * @param questionId The ID of the question to be removed.
-     */
-    public void removeQuestion(EntityId questionId) {
-        this.questionIds.remove(questionId);
     }
 }

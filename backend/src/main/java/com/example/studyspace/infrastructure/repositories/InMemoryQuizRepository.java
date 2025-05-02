@@ -3,8 +3,6 @@ package com.example.studyspace.infrastructure.repositories;
 import com.example.studyspace.application.common.interfaces.repositories.QuizRepository;
 import com.example.studyspace.application.common.interfaces.repositories.UserRepository;
 import com.example.studyspace.domain.quiz.Quiz;
-import com.example.studyspace.domain.quiz.entities.Question;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -20,6 +18,7 @@ public class InMemoryQuizRepository implements QuizRepository {
         this.userRepository = userRepository;
 
         quizzes.add(Quiz.create(
+            new ArrayList<>(),
             "Math Quiz",
             "A quiz about basic math",
             "Easy",
@@ -28,6 +27,7 @@ public class InMemoryQuizRepository implements QuizRepository {
             this.userRepository.getByUsername("admin").getId()
         ));
         quizzes.add(Quiz.create(
+            new ArrayList<>(),
             "Science Quiz",
             "A quiz about basic science",
             "Medium",
@@ -36,6 +36,7 @@ public class InMemoryQuizRepository implements QuizRepository {
             this.userRepository.getByUsername("admin").getId()
         ));
         quizzes.add(Quiz.create(
+            new ArrayList<>(),
             "History Quiz",
             "A quiz about basic history",
             "Hard",

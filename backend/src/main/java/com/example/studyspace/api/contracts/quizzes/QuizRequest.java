@@ -1,5 +1,8 @@
 package com.example.studyspace.api.contracts.quizzes;
 
+import com.example.studyspace.domain.quiz.valueobjects.Question;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +17,7 @@ import java.util.List;
  * @version 1.0
  */
 public record QuizRequest (
+    ArrayList<Question> questions,
     String title,
     String description,
     String difficulty,

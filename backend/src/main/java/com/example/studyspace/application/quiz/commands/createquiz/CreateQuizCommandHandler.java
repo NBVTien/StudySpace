@@ -41,6 +41,7 @@ public class CreateQuizCommandHandler implements UseCase<CreateQuizCommand, Quiz
         }
 
         Quiz quiz = Quiz.create(
+            command.getQuizDto().questions(),
             command.getQuizDto().title(),
             command.getQuizDto().description(),
             command.getQuizDto().difficulty(),

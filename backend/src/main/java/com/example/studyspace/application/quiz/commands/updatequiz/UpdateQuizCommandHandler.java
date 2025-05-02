@@ -41,6 +41,7 @@ public class UpdateQuizCommandHandler implements UseCase<UpdateQuizCommand, Quiz
         }
 
         quiz.update(
+            quizDto.questions(),
             quizDto.title(),
             quizDto.description(),
             quizDto.difficulty(),
