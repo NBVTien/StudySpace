@@ -1,6 +1,8 @@
 package com.example.studyspace.api.controllers;
 
 import com.example.studyspace.api.contracts.quizzes.QuizRequest;
+import com.example.studyspace.application.common.models.ListQuery;
+import com.example.studyspace.application.common.models.PaginatedResult;
 import com.example.studyspace.application.common.services.UseCaseMediator;
 import com.example.studyspace.application.quiz.commands.createquiz.CreateQuizCommand;
 import com.example.studyspace.application.quiz.commands.deletequiz.DeleteQuizCommand;
@@ -17,8 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * <code>QuizController</code> is responsible for handling HTTP requests related to quizzes and their questions.
@@ -43,13 +43,20 @@ public class QuizController {
      *
      */
     @GetMapping()
-    public ResponseEntity<List<QuizResponse>> getAllQuizzes() {
+    public ResponseEntity<PaginatedResult<QuizResponse>> getAllQuizzes(
+        @RequestParam(defaultValue = "1") int page,
+        @RequestParam(defaultValue = "3") int pageSize
+    ) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = (String) authentication.getDetails();
+        var listQuery = ListQuery.builder()
+            .page(page)
+            .pageSize(pageSize)
+            .build();
 
-        var query = new ReadQuizzesQuery(userId);
-        List<Quiz> quizzes = mediator.execute(query);
-        return ResponseEntity.ok(QuizMapper.quizResponses(quizzes));
+        var query = new ReadQuizzesQuery(userId, listQuery);
+        PaginatedResult<Quiz> quizzes = mediator.execute(query);
+        return ResponseEntity.ok(QuizMapper.paginatedQuizResponses(quizzes));
     }
 
     /**

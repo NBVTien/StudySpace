@@ -1,8 +1,8 @@
 package com.example.studyspace.application.common.interfaces.repositories;
 
+import com.example.studyspace.application.common.models.PaginatedResult;
 import com.example.studyspace.domain.quiz.Quiz;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -12,13 +12,6 @@ import java.util.UUID;
  * @version 1.0
  */
 public interface QuizRepository {
-    /**
-     * Retrieves all quizzes from the data store.
-     *
-     * @return A list of <code>Quiz</code> objects.
-     *
-     */
-    List<Quiz> getAll();
 
     /**
      * Retrieves all quizzes owned by a specific user.
@@ -27,7 +20,7 @@ public interface QuizRepository {
      * @return A list of <code>Quiz</code> objects owned by the specified user.
      *
      */
-    List<Quiz> getAllByOwnerId(UUID ownerId);
+    PaginatedResult<Quiz> getAllByOwnerId(UUID ownerId, int page, int pageSize);
 
     /**
      * Retrieves a quiz by its unique identifier.

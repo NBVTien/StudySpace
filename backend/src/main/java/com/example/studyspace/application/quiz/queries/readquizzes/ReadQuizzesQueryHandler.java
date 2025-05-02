@@ -2,10 +2,10 @@ package com.example.studyspace.application.quiz.queries.readquizzes;
 
 import com.example.studyspace.application.common.interfaces.repositories.QuizRepository;
 import com.example.studyspace.application.common.interfaces.usecases.UseCase;
+import com.example.studyspace.application.common.models.PaginatedResult;
 import com.example.studyspace.domain.quiz.Quiz;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -15,7 +15,7 @@ import java.util.UUID;
  * @version 1.0
  */
 @Service
-public class ReadQuizzesQueryHandler implements UseCase<ReadQuizzesQuery, List<Quiz>> {
+public class ReadQuizzesQueryHandler implements UseCase<ReadQuizzesQuery, PaginatedResult<Quiz>> {
 
     private final QuizRepository quizRepository;
 
@@ -30,7 +30,11 @@ public class ReadQuizzesQueryHandler implements UseCase<ReadQuizzesQuery, List<Q
      * @return A list of quizzes.
      */
     @Override
-    public List<Quiz> execute(ReadQuizzesQuery query) {
-        return quizRepository.getAllByOwnerId(UUID.fromString(query.getOwnerId()));
+    public PaginatedResult<Quiz> execute(ReadQuizzesQuery query) {
+        return quizRepository.getAllByOwnerId(
+            UUID.fromString(query.getOwnerId()),
+            query.getRequest().getPage(),
+            query.getRequest().getPageSize()
+        );
     }
 }

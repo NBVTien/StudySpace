@@ -2,6 +2,7 @@ package com.example.studyspace.infrastructure.repositories;
 
 import com.example.studyspace.application.common.interfaces.repositories.QuizRepository;
 import com.example.studyspace.application.common.interfaces.repositories.UserRepository;
+import com.example.studyspace.application.common.models.PaginatedResult;
 import com.example.studyspace.domain.quiz.Quiz;
 import org.springframework.stereotype.Repository;
 
@@ -45,19 +46,25 @@ public class InMemoryQuizRepository implements QuizRepository {
     }
 
     @Override
-    public List<Quiz> getAll() {
-        return quizzes;
-    }
+    public PaginatedResult<Quiz> getAllByOwnerId(UUID ownerId, int page, int pageSize) {
+        List<Quiz> filteredQuizzes = quizzes.stream()
+            .filter(quiz -> quiz.getOwnerId().getValue().equals(ownerId))
+            .toList();
 
-    @Override
-    public List<Quiz> getAllByOwnerId(UUID ownerId) {
-        List<Quiz> ownedQuizzes = new ArrayList<>();
-        for (Quiz quiz : quizzes) {
-            if (quiz.getOwnerId().getValue().equals(ownerId)) {
-                ownedQuizzes.add(quiz);
-            }
-        }
-        return ownedQuizzes;
+        int total = filteredQuizzes.size();
+        int totalPages = (int) Math.ceil((double) total / pageSize);
+        int fromIndex = Math.min((page - 1) * pageSize, total);
+        int toIndex = Math.min(fromIndex + pageSize, total);
+
+        List<Quiz> paginatedQuizzes = filteredQuizzes.subList(fromIndex, toIndex);
+
+        return PaginatedResult.<Quiz>builder()
+            .data(paginatedQuizzes)
+            .total(total)
+            .totalPages(totalPages)
+            .page(page)
+            .pageSize(pageSize)
+            .build();
     }
 
     @Override

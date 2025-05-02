@@ -1,5 +1,6 @@
 package com.example.studyspace.api.mappers;
 
+import com.example.studyspace.application.common.models.PaginatedResult;
 import com.example.studyspace.application.quiz.dtos.QuizDto;
 import com.example.studyspace.domain.quiz.Quiz;
 import com.example.studyspace.api.contracts.quizzes.QuizRequest;
@@ -45,6 +46,16 @@ public interface QuizMapper {
         return quizzes.stream()
             .map(QuizMapper::quizResponse)
             .toList();
+    }
+
+    static PaginatedResult<QuizResponse> paginatedQuizResponses(PaginatedResult<Quiz> quizzes) {
+        return PaginatedResult.<QuizResponse>builder()
+            .data(quizResponses(quizzes.getData()))
+            .total(quizzes.getTotal())
+            .totalPages(quizzes.getTotalPages())
+            .page(quizzes.getPage())
+            .pageSize(quizzes.getPageSize())
+            .build();
     }
 
     /**

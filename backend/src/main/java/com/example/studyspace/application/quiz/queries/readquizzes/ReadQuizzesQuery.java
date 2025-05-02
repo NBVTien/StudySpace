@@ -1,10 +1,10 @@
 package com.example.studyspace.application.quiz.queries.readquizzes;
 
 import com.example.studyspace.application.common.interfaces.usecases.UseCaseInput;
+import com.example.studyspace.application.common.models.ListQuery;
+import com.example.studyspace.application.common.models.PaginatedResult;
 import com.example.studyspace.domain.quiz.Quiz;
 import lombok.Value;
-
-import java.util.List;
 
 /**
  * Query for reading quizzes.
@@ -13,6 +13,7 @@ import java.util.List;
  * @version 1.0
  */
 @Value
-public class ReadQuizzesQuery implements UseCaseInput<List<Quiz>> {
+public class ReadQuizzesQuery implements UseCaseInput<PaginatedResult<Quiz>> {
     String ownerId;
+    ListQuery request;
 }
