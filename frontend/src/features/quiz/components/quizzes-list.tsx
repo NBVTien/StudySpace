@@ -1,6 +1,8 @@
 import { useQuizzes } from '@/features/quiz/api/get-quizzes';
 import QuizCard from '@/features/quiz/components/quiz-card';
 
+import EmptyState from './empty-state';
+
 const QuizzesList = ({ searchTerm }: { searchTerm: string }) => {
   const quizzesQuery = useQuizzes();
 
@@ -8,10 +10,16 @@ const QuizzesList = ({ searchTerm }: { searchTerm: string }) => {
     return <div>Loading...</div>;
   }
 
-  const quizzes = quizzesQuery.data;
+  const quizzes = quizzesQuery.data?.data;
 
-  if (!quizzes) {
-    return null;
+  if (!quizzes || quizzes.length === 0) {
+    return (
+      <EmptyState
+        title="No quizzes yet"
+        description="Get started by creating your first quiz"
+        showCreateButton
+      />
+    );
   }
 
   const filteredQuizzes = quizzes.filter(
@@ -24,14 +32,15 @@ const QuizzesList = ({ searchTerm }: { searchTerm: string }) => {
   );
 
   return filteredQuizzes.length === 0 ? (
-    <div className="rounded-xl bg-white p-12 text-center shadow-sm">
-      <h3 className="text-xl font-medium text-gray-900">No quizzes found</h3>
-      <p className="mt-2 text-gray-600">
-        {searchTerm
+    <EmptyState
+      title="No quizzes found"
+      description={
+        searchTerm
           ? 'Try adjusting your search criteria'
-          : 'Start by creating your first quiz'}
-      </p>
-    </div>
+          : 'Start by creating your first quiz'
+      }
+      showCreateButton={!searchTerm}
+    />
   ) : (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {filteredQuizzes.map((quiz) => (

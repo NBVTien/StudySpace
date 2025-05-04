@@ -4,7 +4,7 @@ export async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
   const accessToken = req.cookies.get('authorization')?.value;
 
-  if (accessToken && path.startsWith('/api')) {
+  if (accessToken && path.startsWith('/api') && !path.startsWith('/api/auth')) {
     const headers = new Headers(req.headers);
     headers.set('Authorization', `Bearer ${accessToken}`);
     return NextResponse.next({

@@ -19,3 +19,14 @@ export type Quiz = {
   estimatedTimeInMinutes: number;
   tags: string[];
 };
+
+export type Meta = {
+  total: number;
+  totalPages: number;
+  page: number;
+  pageSize: number;
+};
+
+export type Quizzes = Meta & {
+  data: Quiz[];
+};

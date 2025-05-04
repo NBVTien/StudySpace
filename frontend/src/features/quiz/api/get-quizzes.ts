@@ -1,9 +1,9 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 
 import { api } from '@/lib/api-client';
-import { Quiz } from '@/types/api';
+import { Quizzes } from '@/types/api';
 
-export const getQuizzes = async (): Promise<Quiz[]> => {
+export const getQuizzes = async (): Promise<Quizzes> => {
   return api.get('/quizzes');
 };
 
