@@ -20,6 +20,21 @@ export type Quiz = {
   tags: string[];
 };
 
+export type Question = {
+  question: string;
+  options: string[];
+  correctAnswer: string;
+};
+
+export type QuizRequest = {
+  questions: Question[];
+  title: string;
+  description: string;
+  difficulty: 'Easy' | 'Medium' | 'Hard';
+  estimatedTimeInMinutes: number;
+  tags: string[];
+};
+
 export type Meta = {
   total: number;
   totalPages: number;

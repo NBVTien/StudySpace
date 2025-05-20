@@ -80,7 +80,7 @@ const OverviewPage = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <Link href="/quiz/create">
+          <Link href="/quizzes/new">
             <Button
               variant="default"
               size="lg"
