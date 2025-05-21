@@ -84,7 +84,6 @@ export const NewQuizContainer = () => {
       ],
     }));
 
-    // Navigate to the new question
     const newQuestionIndex = quizData.questions ? quizData.questions.length : 0;
     setActiveTab(`question-${newQuestionIndex + 1}`);
   };

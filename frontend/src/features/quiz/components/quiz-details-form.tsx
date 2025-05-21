@@ -29,16 +29,15 @@ export const QuizDetailsForm = ({
 }: QuizDetailsFormProps) => {
   return (
     <div className="mx-auto max-w-2xl">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-          Create New Quiz
-        </h1>
-        <p className="mt-2 text-sm text-gray-600">
-          Fill in the details to create your new quiz.
-        </p>
-      </div>
-
       <div className="rounded-xl bg-white/80 p-6 shadow-sm backdrop-blur-sm">
+        <div className="mb-6">
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+            Create New Quiz
+          </h1>
+          <p className="mt-2 text-sm text-gray-600">
+            Fill in the details to create your new quiz.
+          </p>
+        </div>
         <Form
           onSubmit={onSubmit}
           schema={quizDetailsSchema}
@@ -58,24 +57,26 @@ export const QuizDetailsForm = ({
                 registration={register('description')}
                 defaultValue={quizData.description}
               />
-              <Select
-                label="Difficulty"
-                error={getFieldError(formState.errors.difficulty)}
-                registration={register('difficulty')}
-                defaultValue={quizData.difficulty}
-                options={[
-                  { label: 'Easy', value: 'Easy' },
-                  { label: 'Medium', value: 'Medium' },
-                  { label: 'Hard', value: 'Hard' },
-                ]}
-              />
-              <Input
-                type="number"
-                label="Estimated Time (minutes)"
-                error={getFieldError(formState.errors.estimatedTimeInMinutes)}
-                registration={register('estimatedTimeInMinutes')}
-                defaultValue={quizData.estimatedTimeInMinutes?.toString()}
-              />
+              <div className="grid grid-cols-2 gap-3">
+                <Select
+                  label="Difficulty"
+                  error={getFieldError(formState.errors.difficulty)}
+                  registration={register('difficulty')}
+                  defaultValue={quizData.difficulty}
+                  options={[
+                    { label: 'Easy', value: 'Easy' },
+                    { label: 'Medium', value: 'Medium' },
+                    { label: 'Hard', value: 'Hard' },
+                  ]}
+                />
+                <Input
+                  type="number"
+                  label="Estimated Time (minutes)"
+                  error={getFieldError(formState.errors.estimatedTimeInMinutes)}
+                  registration={register('estimatedTimeInMinutes')}
+                  defaultValue={quizData.estimatedTimeInMinutes?.toString()}
+                />
+              </div>
               <Input
                 label="Tags (comma separated)"
                 error={getFieldError(formState.errors.tagsInput)}

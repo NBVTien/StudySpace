@@ -31,13 +31,13 @@ export const QuestionForm = ({
 }: QuestionFormProps) => {
   return (
     <div className="mx-auto max-w-2xl">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-          Question {questionIndex + 1}
-        </h1>
-      </div>
-
       <div className="rounded-xl bg-white/80 p-6 shadow-sm backdrop-blur-sm">
+        <div className="mb-6">
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+            Question #{questionIndex + 1}
+          </h1>
+        </div>
+
         <Form
           onSubmit={(values) => onSubmit(values, questionIndex)}
           schema={questionSchema}

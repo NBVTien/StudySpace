@@ -42,9 +42,9 @@ export const QuizNavigation = ({
           variant="ghost"
           onClick={onAddQuestion}
           className="flex items-center px-3"
+          icon={<PlusCircle size={18} />}
         >
-          <PlusCircle size={18} />
-          <span className="ml-2">Add Question</span>
+          Add Question
         </Button>
 
         {/* Submit quiz button */}
@@ -52,10 +52,10 @@ export const QuizNavigation = ({
           variant="ghost"
           onClick={onSubmitQuiz}
           disabled={!canSubmitQuiz}
-          className="flex items-center px-3"
+          className="flex flex-row items-center px-3"
+          icon={<Send size={18} />}
         >
-          <Send size={18} />
-          <span className="ml-2">Submit Quiz</span>
+          Submit Quiz
         </Button>
       </div>
     </TabsList>
