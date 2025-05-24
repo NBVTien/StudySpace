@@ -9,26 +9,21 @@ import { QuizDetailsForm, quizDetailsSchema } from './quiz-details-form';
 import { QuizNavigation } from './quiz-navigation';
 
 export const NewQuizContainer = () => {
-  // State for the entire quiz
   const [quizData, setQuizData] = useState<Partial<QuizRequest>>({
     questions: [],
     tags: [],
   });
 
-  // Current active tab
   const [activeTab, setActiveTab] = useState('quiz-detail');
 
-  // Handle quiz details form submission
   const handleQuizDetailsSubmit = (
     values: z.infer<typeof quizDetailsSchema>,
   ) => {
-    // Convert tagsInput string to tags array
     const tags = values.tagsInput
       .split(',')
       .map((tag: string) => tag.trim())
       .filter(Boolean);
 
-    // Update quiz data with form values, transforming tags appropriately
     setQuizData((prev) => ({
       ...prev,
       title: values.title,
@@ -38,7 +33,6 @@ export const NewQuizContainer = () => {
       tags,
     }));
 
-    // Navigate to the first question or add a new question if none exists
     if (quizData.questions && quizData.questions.length > 0) {
       setActiveTab('question-1');
     } else {
@@ -46,17 +40,13 @@ export const NewQuizContainer = () => {
     }
   };
 
-  // Handle question form submission
   const handleQuestionSubmit = (
     values: z.infer<typeof questionSchema>,
     questionIndex: number,
   ) => {
     const question: Question = {
       question: values.question,
-      options: values.options
-        .split('\n')
-        .filter((line) => line.trim() !== '')
-        .map((line) => line.trim()),
+      options: values.options,
       correctAnswer: values.correctAnswer,
     };
 
@@ -66,7 +56,6 @@ export const NewQuizContainer = () => {
       return { ...prev, questions: updatedQuestions };
     });
 
-    // Navigate to the next question if it exists, or back to quiz details
     if (quizData.questions && questionIndex < quizData.questions.length - 1) {
       setActiveTab(`question-${questionIndex + 2}`);
     } else {
@@ -74,7 +63,6 @@ export const NewQuizContainer = () => {
     }
   };
 
-  // Add a new question
   const handleAddQuestion = () => {
     setQuizData((prev) => ({
       ...prev,
@@ -88,7 +76,6 @@ export const NewQuizContainer = () => {
     setActiveTab(`question-${newQuestionIndex + 1}`);
   };
 
-  // Submit the complete quiz
   const handleSubmitQuiz = () => {
     if (
       !quizData.title ||
@@ -102,13 +89,10 @@ export const NewQuizContainer = () => {
       return;
     }
 
-    // Here you would make an API call to submit the quiz
     console.log('Submitting quiz:', quizData);
-    // For now we'll just log the data
     alert('Quiz submitted successfully!');
   };
 
-  // Can submit quiz if all required data is present
   const canSubmitQuiz = Boolean(
     quizData.title &&
       quizData.description &&

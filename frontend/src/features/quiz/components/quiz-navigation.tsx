@@ -18,7 +18,7 @@ export const QuizNavigation = ({
   canSubmitQuiz,
 }: QuizNavigationProps) => {
   return (
-    <TabsList className="fixed inset-x-0 bottom-0 z-50 flex h-14 w-full items-start justify-start border-t bg-background shadow-lg">
+    <TabsList className="fixed inset-x-0 bottom-0 z-50 flex h-14 w-full items-center justify-start border-t bg-background shadow-lg">
       <TabsTrigger
         value="quiz-detail"
         className="flex justify-center gap-2 py-3"
@@ -49,7 +49,7 @@ export const QuizNavigation = ({
 
         {/* Submit quiz button */}
         <Button
-          variant="ghost"
+          variant="default"
           onClick={onSubmitQuiz}
           disabled={!canSubmitQuiz}
           className="flex flex-row items-center px-3"

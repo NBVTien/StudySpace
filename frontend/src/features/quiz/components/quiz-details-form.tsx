@@ -10,7 +10,7 @@ export const quizDetailsSchema = z.object({
   description: z.string().min(1, 'Description is required'),
   difficulty: z.enum(['Easy', 'Medium', 'Hard']),
   estimatedTimeInMinutes: z.coerce.number().min(1, 'Time estimate is required'),
-  tagsInput: z.string().min(3, 'Please add at least one tag'),
+  tagsInput: z.string(),
 });
 
 type QuizDetailsFormProps = {
@@ -18,7 +18,6 @@ type QuizDetailsFormProps = {
   onSubmit: (values: z.infer<typeof quizDetailsSchema>) => void;
 };
 
-// Helper function to safely cast error types
 const getFieldError = (error: any): FieldError | undefined => {
   return error as FieldError | undefined;
 };
