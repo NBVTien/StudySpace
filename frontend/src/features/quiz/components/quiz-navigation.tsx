@@ -21,22 +21,26 @@ export const QuizNavigation = ({
     <TabsList className="fixed inset-x-0 bottom-0 z-50 flex h-14 w-full items-center justify-start border-t bg-background shadow-lg">
       <TabsTrigger
         value="quiz-detail"
-        className="flex justify-center gap-2 py-3"
+        className="flex shrink-0 justify-center gap-2 py-3"
       >
         <Home size={18} />
       </TabsTrigger>
 
-      {questions?.map((_, index) => (
-        <TabsTrigger
-          key={`tab-question-${index + 1}`}
-          value={`question-${index + 1}`}
-          className="flex justify-center gap-2 py-3"
-        >
-          <span>{index + 1}</span>
-        </TabsTrigger>
-      ))}
+      <div className="show-scrollbar-on-hover flex flex-1 items-center overflow-x-auto">
+        <div className="flex">
+          {questions?.map((_, index) => (
+            <TabsTrigger
+              key={`tab-question-${index + 1}`}
+              value={`question-${index + 1}`}
+              className="flex justify-center gap-2 py-3"
+            >
+              <span>{index + 1}</span>
+            </TabsTrigger>
+          ))}
+        </div>
+      </div>
 
-      <div className="ml-auto flex items-center">
+      <div className="ml-auto flex shrink-0 items-center">
         {/* Add question button */}
         <Button
           variant="ghost"

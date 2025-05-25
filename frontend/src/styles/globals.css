@@ -70,6 +70,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -79,8 +80,46 @@
   .animation-delay-2000 {
     animation-delay: 2s;
   }
+
   .animation-delay-4000 {
     animation-delay: 4s;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .show-scrollbar-on-hover {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .show-scrollbar-on-hover::-webkit-scrollbar {
+    display: none;
+  }
+
+  .show-scrollbar-on-hover:hover {
+    -ms-overflow-style: auto;
+    scrollbar-width: thin;
+  }
+
+  .show-scrollbar-on-hover:hover::-webkit-scrollbar {
+    display: block;
+    height: 6px;
+  }
+
+  .show-scrollbar-on-hover:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(155, 155, 155, 0.5);
+    border-radius: 3px;
+  }
+
+  .show-scrollbar-on-hover:hover::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
   }
 }
 
