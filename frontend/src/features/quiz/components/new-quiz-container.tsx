@@ -76,6 +76,25 @@ export const NewQuizContainer = () => {
     setActiveTab(`question-${newQuestionIndex + 1}`);
   };
 
+  const handleDeleteQuestion = (questionIndex: number) => {
+    setQuizData((prev) => {
+      const updatedQuestions = [...(prev.questions || [])];
+      updatedQuestions.splice(questionIndex, 1);
+      return { ...prev, questions: updatedQuestions };
+    });
+
+    if (activeTab === `question-${questionIndex + 1}`) {
+      if (questionIndex > 0) {
+        setActiveTab(`question-${questionIndex}`);
+      } else {
+        setActiveTab('quiz-detail');
+      }
+    } else if (parseInt(activeTab.split('-')[1]) > questionIndex + 1) {
+      const currentQuestionNumber = parseInt(activeTab.split('-')[1]);
+      setActiveTab(`question-${currentQuestionNumber - 1}`);
+    }
+  };
+
   const handleSubmitQuiz = () => {
     if (
       !quizData.title ||
@@ -128,6 +147,7 @@ export const NewQuizContainer = () => {
               question={question}
               questionIndex={index}
               onSubmit={handleQuestionSubmit}
+              onDelete={handleDeleteQuestion}
             />
           </TabsContent>
         ))}

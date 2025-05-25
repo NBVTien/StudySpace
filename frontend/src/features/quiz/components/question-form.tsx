@@ -1,4 +1,4 @@
-import { Plus, X } from 'lucide-react';
+import { Plus, Trash2, X } from 'lucide-react';
 import React, { useState } from 'react';
 import { FieldError } from 'react-hook-form';
 import { z } from 'zod';
@@ -11,11 +11,19 @@ import type { Question } from '@/types/api';
 
 export const questionSchema = z
   .object({
-    question: z.string().min(1, 'Question is required.'),
+    question: z
+      .string()
+      .trim()
+      .min(1, 'Question is required and cannot be empty.'),
     options: z
-      .array(z.string().min(1, 'Option is required.'))
+      .array(
+        z.string().trim().min(1, 'Option is required and cannot be empty.'),
+      )
       .min(1, 'At least one option is needed. Try again.'),
-    correctAnswer: z.string().min(1, 'Correct answer is required.'),
+    correctAnswer: z
+      .string()
+      .trim()
+      .min(1, 'Correct answer is required and cannot be empty.'),
   })
   .refine((data) => data.options.includes(data.correctAnswer), {
     message: 'Correct answer must be one of the options.',
@@ -29,6 +37,7 @@ type QuestionFormProps = {
     values: z.infer<typeof questionSchema>,
     questionIndex: number,
   ) => void;
+  onDelete?: (questionIndex: number) => void;
 };
 
 const getFieldError = (error: any): FieldError | undefined => {
@@ -39,6 +48,7 @@ export const QuestionForm = ({
   question,
   questionIndex,
   onSubmit,
+  onDelete,
 }: QuestionFormProps) => {
   const [questionOptions, setQuestionOptions] = useState<string[]>(
     question.options.length > 0 ? question.options : [],
@@ -74,10 +84,21 @@ export const QuestionForm = ({
   return (
     <div className="mx-auto max-w-2xl">
       <div className="rounded-xl bg-white/80 p-6 shadow-sm backdrop-blur-sm">
-        <div className="mb-6">
+        <div className="mb-6 flex items-center justify-between">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900">
             Question #{questionIndex + 1}
           </h1>
+          {onDelete && (
+            <Button
+              type="button"
+              variant="ghost"
+              className="text-red-600 hover:bg-red-50 hover:text-red-800"
+              onClick={() => onDelete(questionIndex)}
+              icon={<Trash2 size={18} />}
+            >
+              Delete
+            </Button>
+          )}
         </div>
 
         <Form
@@ -96,7 +117,7 @@ export const QuestionForm = ({
               />
 
               <div className="mb-2 mt-4 flex flex-col">
-                <div className="flex flex-row items-center justify-between">
+                <div className="flex flex-row items-end justify-between">
                   <Label>Options</Label>
                   <Button
                     type="button"
@@ -152,15 +173,25 @@ export const QuestionForm = ({
                 )}
               </div>
 
-              <FormSelect
-                label="Correct answer"
-                error={getFieldError(formState.errors.correctAnswer)}
-                registration={register('correctAnswer')}
-                defaultValue={question.correctAnswer}
-                options={questionOptions
-                  .filter((opt) => opt.trim() !== '')
-                  .map((option) => ({ label: option, value: option }))}
-              />
+              <div className="mt-4">
+                {questionOptions.filter((opt) => opt.trim() !== '').length ===
+                0 ? (
+                  <div className="rounded-md bg-gray-50 p-4 text-sm text-amber-600">
+                    Please add answer options above before selecting a correct
+                    answer.
+                  </div>
+                ) : (
+                  <FormSelect
+                    label="Correct answer"
+                    error={getFieldError(formState.errors.correctAnswer)}
+                    registration={register('correctAnswer')}
+                    defaultValue={question.correctAnswer}
+                    options={questionOptions
+                      .filter((opt) => opt.trim() !== '')
+                      .map((option) => ({ label: option, value: option }))}
+                  />
+                )}
+              </div>
 
               <div className="mt-6">
                 <Button type="submit" className="w-full">
