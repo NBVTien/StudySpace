@@ -2,7 +2,7 @@ import { FieldError } from 'react-hook-form';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
-import { Form, Input, Select, Textarea } from '@/components/ui/form';
+import { Form, Input, FormSelect, Textarea } from '@/components/ui/form';
 import type { QuizRequest } from '@/types/api';
 
 export const quizDetailsSchema = z.object({
@@ -57,7 +57,7 @@ export const QuizDetailsForm = ({
                 defaultValue={quizData.description}
               />
               <div className="grid grid-cols-2 gap-3">
-                <Select
+                <FormSelect
                   label="Difficulty"
                   error={getFieldError(formState.errors.difficulty)}
                   registration={register('difficulty')}

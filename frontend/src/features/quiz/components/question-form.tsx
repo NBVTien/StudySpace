@@ -4,7 +4,7 @@ import { FieldError } from 'react-hook-form';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
-import { Form, AutosizeTextarea } from '@/components/ui/form';
+import { Form, AutosizeTextarea, FormSelect } from '@/components/ui/form';
 import { Error } from '@/components/ui/form/error';
 import { Label } from '@/components/ui/form/label';
 import type { Question } from '@/types/api';
@@ -55,11 +55,9 @@ export const QuestionForm = ({
   };
 
   const removeOption = (index: number) => {
-    if (questionOptions.length > 1) {
-      const newOptions = [...questionOptions];
-      newOptions.splice(index, 1);
-      setQuestionOptions(newOptions);
-    }
+    const newOptions = [...questionOptions];
+    newOptions.splice(index, 1);
+    setQuestionOptions(newOptions);
   };
 
   const handleFormSubmit = (values: any) => {
@@ -97,17 +95,18 @@ export const QuestionForm = ({
                 placeholder="Enter your question here"
               />
 
-              <div className="mb-2 mt-4">
+              <div className="mb-2 mt-4 flex flex-col">
                 <div className="flex flex-row items-center justify-between">
                   <Label>Options</Label>
                   <Button
                     type="button"
                     variant="outline"
+                    size="default"
                     className="mt-2 flex flex-row items-center gap-1"
                     onClick={addOption}
+                    icon={<Plus size={16} />}
                   >
-                    <Plus size={16} />
-                    <span>Add Option</span>
+                    Add Option
                   </Button>
                 </div>
                 <Error
@@ -116,61 +115,52 @@ export const QuestionForm = ({
                   }
                 />
 
-                {questionOptions.map((_, index: number) => {
-                  return (
-                    <div key={index} className="mt-2 flex items-center">
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        className="ml-2 p-2"
-                        onClick={() => removeOption(index)}
-                        disabled={questionOptions.length <= 1}
-                      >
-                        <X size={18} />
-                      </Button>
-                      <AutosizeTextarea
-                        error={getFieldError(
-                          Array.isArray(formState.errors.options)
-                            ? formState.errors.options[index]
-                            : undefined,
-                        )}
-                        registration={register(`options.${index}`)}
-                        defaultValue={question.options[index]}
-                        placeholder={`Option #${index + 1}`}
-                        onChange={(e) => {
-                          handleOptionChange(index, e.target.value);
-                        }}
-                      />
-                    </div>
-                  );
-                })}
+                {questionOptions.length === 0 ? (
+                  <div className="mt-4 rounded-md bg-gray-50 p-4 text-center text-sm text-gray-500">
+                    No options added yet. Click the &quot;Add Option&quot;
+                    button to add answers for this question.
+                  </div>
+                ) : (
+                  questionOptions.map((_, index: number) => {
+                    return (
+                      <div key={index} className="mt-2 flex w-full items-start">
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          className="ml-2 p-2"
+                          onClick={() => removeOption(index)}
+                        >
+                          <X size={18} />
+                        </Button>
+                        <AutosizeTextarea
+                          error={getFieldError(
+                            Array.isArray(formState.errors.options)
+                              ? formState.errors.options[index]
+                              : undefined,
+                          )}
+                          minHeight={25}
+                          registration={register(`options.${index}`)}
+                          defaultValue={question.options[index]}
+                          placeholder={`Option #${index + 1}`}
+                          onChange={(e) => {
+                            handleOptionChange(index, e.target.value);
+                          }}
+                        />
+                      </div>
+                    );
+                  })
+                )}
               </div>
 
-              <div className="mt-4">
-                <Label>Correct Answer</Label>
-                <Error
-                  errorMessage={
-                    getFieldError(formState.errors.correctAnswer)?.message
-                  }
-                />
-
-                <select
-                  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  {...register('correctAnswer')}
-                  defaultValue={question.correctAnswer}
-                >
-                  <option value="" disabled>
-                    Select correct answer
-                  </option>
-                  {questionOptions
-                    .filter((opt) => opt.trim() !== '')
-                    .map((option, index) => (
-                      <option key={index} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                </select>
-              </div>
+              <FormSelect
+                label="Correct answer"
+                error={getFieldError(formState.errors.correctAnswer)}
+                registration={register('correctAnswer')}
+                defaultValue={question.correctAnswer}
+                options={questionOptions
+                  .filter((opt) => opt.trim() !== '')
+                  .map((option) => ({ label: option, value: option }))}
+              />
 
               <div className="mt-6">
                 <Button type="submit" className="w-full">
