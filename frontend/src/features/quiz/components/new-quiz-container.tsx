@@ -4,6 +4,8 @@ import { z } from 'zod';
 import { TabsContent, Tabs } from '@/components/ui/tabs';
 import type { Question, QuizRequest } from '@/types/api';
 
+import { useCreateQuiz } from '../api/create-quiz';
+
 import { QuestionForm, questionSchema } from './question-form';
 import { QuizDetailsForm, quizDetailsSchema } from './quiz-details-form';
 import { QuizNavigation } from './quiz-navigation';
@@ -13,8 +15,8 @@ export const NewQuizContainer = () => {
     questions: [],
     tags: [],
   });
-
   const [activeTab, setActiveTab] = useState('quiz-detail');
+  const createQuizMutation = useCreateQuiz();
 
   const handleQuizDetailsSubmit = (
     values: z.infer<typeof quizDetailsSchema>,
@@ -107,9 +109,8 @@ export const NewQuizContainer = () => {
       alert('Please complete all required fields before submitting the quiz');
       return;
     }
-
-    console.log('Submitting quiz:', quizData);
-    alert('Quiz submitted successfully!');
+    console.log(quizData);
+    createQuizMutation.mutate(quizData as QuizRequest);
   };
 
   const canSubmitQuiz = Boolean(

@@ -1,6 +1,7 @@
 package com.example.studyspace.api.controllers;
 
 import com.example.studyspace.api.contracts.quizzes.QuizRequest;
+import com.example.studyspace.api.contracts.quizzes.QuizResponse;
 import com.example.studyspace.application.common.models.ListQuery;
 import com.example.studyspace.application.common.models.PaginatedResult;
 import com.example.studyspace.application.common.services.UseCaseMediator;
@@ -10,7 +11,7 @@ import com.example.studyspace.application.quiz.commands.updatequiz.UpdateQuizCom
 import com.example.studyspace.application.quiz.queries.readquiz.ReadQuizQuery;
 import com.example.studyspace.application.quiz.queries.readquizzes.ReadQuizzesQuery;
 import com.example.studyspace.domain.quiz.Quiz;
-import com.example.studyspace.api.contracts.quizzes.QuizResponse;
+import com.example.studyspace.api.contracts.quizzes.QuizItemResponse;
 import com.example.studyspace.api.mappers.QuizMapper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +44,7 @@ public class QuizController {
      *
      */
     @GetMapping()
-    public ResponseEntity<PaginatedResult<QuizResponse>> getAllQuizzes(
+    public ResponseEntity<PaginatedResult<QuizItemResponse>> getAllQuizzes(
         @RequestParam(defaultValue = "1") int page,
         @RequestParam(defaultValue = "3") int pageSize
     ) {

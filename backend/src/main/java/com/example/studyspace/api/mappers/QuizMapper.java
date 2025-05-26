@@ -1,10 +1,11 @@
 package com.example.studyspace.api.mappers;
 
+import com.example.studyspace.api.contracts.quizzes.QuizResponse;
 import com.example.studyspace.application.common.models.PaginatedResult;
 import com.example.studyspace.application.quiz.dtos.QuizDto;
 import com.example.studyspace.domain.quiz.Quiz;
 import com.example.studyspace.api.contracts.quizzes.QuizRequest;
-import com.example.studyspace.api.contracts.quizzes.QuizResponse;
+import com.example.studyspace.api.contracts.quizzes.QuizItemResponse;
 
 import java.util.List;
 
@@ -23,10 +24,10 @@ public interface QuizMapper {
      * @return A <code>QuizResponse</code> API response model.
      *
      */
-    static QuizResponse quizResponse(Quiz quiz) {
-        return QuizResponse.builder()
+    static QuizItemResponse quizItemResponse(Quiz quiz) {
+        return QuizItemResponse.builder()
             .id(quiz.getId().getValue())
-            .questionCount(quiz.getQuestions().size())
+            .questionCount(quiz.getQuestions() != null ? quiz.getQuestions().size() : 0)
             .title(quiz.getTitle())
             .description(quiz.getDescription())
             .difficulty(quiz.getDifficulty())
@@ -35,6 +36,19 @@ public interface QuizMapper {
             .build();
     }
 
+    static QuizResponse quizResponse(Quiz quiz) {
+        return QuizResponse.builder()
+                .id(quiz.getId().getValue())
+                .questions(quiz.getQuestions())
+                .title(quiz.getTitle())
+                .description(quiz.getDescription())
+                .difficulty(quiz.getDifficulty())
+                .estimatedTimeInMinutes(quiz.getEstimatedTimeInMinutes())
+                .tags(quiz.getTags())
+                .build();
+    }
+
+
     /**
      * Converts a list of <code>Quiz</code> domain models to a list of <code>QuizResponse</code> API response models.
      *
@@ -42,14 +56,14 @@ public interface QuizMapper {
      * @return A list of <code>QuizResponse</code> API response models.
      *
      */
-    static List<QuizResponse> quizResponses(List<Quiz> quizzes) {
+    static List<QuizItemResponse> quizResponses(List<Quiz> quizzes) {
         return quizzes.stream()
-            .map(QuizMapper::quizResponse)
+            .map(QuizMapper::quizItemResponse)
             .toList();
     }
 
-    static PaginatedResult<QuizResponse> paginatedQuizResponses(PaginatedResult<Quiz> quizzes) {
-        return PaginatedResult.<QuizResponse>builder()
+    static PaginatedResult<QuizItemResponse> paginatedQuizResponses(PaginatedResult<Quiz> quizzes) {
+        return PaginatedResult.<QuizItemResponse>builder()
             .data(quizResponses(quizzes.getData()))
             .total(quizzes.getTotal())
             .totalPages(quizzes.getTotalPages())
