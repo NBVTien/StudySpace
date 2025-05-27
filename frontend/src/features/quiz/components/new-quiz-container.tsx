@@ -10,13 +10,21 @@ import { QuestionForm, questionSchema } from './question-form';
 import { QuizDetailsForm, quizDetailsSchema } from './quiz-details-form';
 import { QuizNavigation } from './quiz-navigation';
 
-export const NewQuizContainer = () => {
+type NewQuizContainerProps = {
+  onSuccess?: () => void;
+};
+
+export const NewQuizContainer = ({ onSuccess }: NewQuizContainerProps) => {
   const [quizData, setQuizData] = useState<Partial<QuizRequest>>({
     questions: [],
     tags: [],
   });
   const [activeTab, setActiveTab] = useState('quiz-detail');
-  const createQuizMutation = useCreateQuiz();
+  const createQuizMutation = useCreateQuiz({
+    mutationConfig: {
+      onSuccess: onSuccess,
+    },
+  });
 
   const handleQuizDetailsSubmit = (
     values: z.infer<typeof quizDetailsSchema>,
