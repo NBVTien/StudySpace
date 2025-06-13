@@ -1,8 +1,10 @@
 import NextLink from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Form, Input } from '@/components/ui/form';
+import { Error } from '@/components/ui/form/error';
 import { paths } from '@/config/paths';
 import { useLogin, loginInputSchema } from '@/lib/auth';
 
@@ -11,8 +13,16 @@ type LoginFormProps = {
 };
 
 export const LoginForm = ({ onSuccess }: LoginFormProps) => {
+  const [loginError, setLoginError] = useState<string | null>(null);
+
   const login = useLogin({
     onSuccess,
+    onError: (error) => {
+      setLoginError(
+        error.message ||
+          'Failed to login. Please check your credentials and try again.',
+      );
+    },
   });
 
   const searchParams = useSearchParams();
@@ -21,6 +31,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
     <div>
       <Form
         onSubmit={(values) => {
+          setLoginError(null);
           login.mutate(values);
         }}
         schema={loginInputSchema}
@@ -39,7 +50,14 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
               error={formState.errors['password']}
               registration={register('password')}
             />
-            <div>
+
+            {loginError && (
+              <div className="mt-4">
+                <Error errorMessage={loginError} />
+              </div>
+            )}
+
+            <div className="mt-4">
               <Button
                 isLoading={login.isPending}
                 type="submit"

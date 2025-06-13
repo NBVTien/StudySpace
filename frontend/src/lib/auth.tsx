@@ -30,7 +30,13 @@ export const getUserQueryOptions = () => {
 
 export const useUser = () => useQuery(getUserQueryOptions());
 
-export const useLogin = ({ onSuccess }: { onSuccess?: () => void }) => {
+export const useLogin = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: () => void;
+  onError?: (error: Error) => void;
+}) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: loginWithEmailAndPassword,
@@ -38,10 +44,19 @@ export const useLogin = ({ onSuccess }: { onSuccess?: () => void }) => {
       queryClient.setQueryData(userQueryKey, data.user);
       onSuccess?.();
     },
+    onError: (error: Error) => {
+      onError?.(error);
+    },
   });
 };
 
-export const useRegister = ({ onSuccess }: { onSuccess?: () => void }) => {
+export const useRegister = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: () => void;
+  onError?: (error: Error) => void;
+}) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: registerWithEmailAndPassword,
@@ -49,16 +64,28 @@ export const useRegister = ({ onSuccess }: { onSuccess?: () => void }) => {
       queryClient.setQueryData(userQueryKey, data.user);
       onSuccess?.();
     },
+    onError: (error: Error) => {
+      onError?.(error);
+    },
   });
 };
 
-export const useLogout = ({ onSuccess }: { onSuccess?: () => void }) => {
+export const useLogout = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: () => void;
+  onError?: (error: Error) => void;
+}) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: logout,
     onSuccess: () => {
       queryClient.removeQueries({ queryKey: userQueryKey });
       onSuccess?.();
+    },
+    onError: (error: Error) => {
+      onError?.(error);
     },
   });
 };

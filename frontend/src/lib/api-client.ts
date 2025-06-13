@@ -55,7 +55,15 @@ async function fetchApi<T>(
   });
 
   if (!response.ok) {
-    const message = (await response.json()).message || response.statusText;
+    let message = response.statusText;
+    try {
+      const data = await response.json();
+      if (data.message) {
+        message = data.message;
+      }
+    } catch {
+      /* empty */
+    }
     if (typeof window !== 'undefined') {
       useNotifications.getState().addNotification({
         type: 'error',
